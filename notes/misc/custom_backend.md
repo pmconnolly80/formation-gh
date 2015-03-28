@@ -54,25 +54,12 @@ Les routes suivantes doivent être exposées (avec les méthodes HTTP correspond
 
 Voir la déclaration détaillée des routes dans `routes/api.js`.
 
-Routes
-++++++
-
-Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, puis de les authentifier et de les déconnecter.
-
-    GET /api/pages - liste des pages
-    POST /api/pages/add
-    POST /api/pages/update
-    GET /api/pages/delete/:id
-    GET /api/pages/admin-details/:id
-
-Créer le fichier .
-
-Ajouter les lignes suivantes dans `app.js` :
+Les routes sont rattachées à l'application principale (dans `app.js`) grâce aux lignes suivantes :
 
     var api = require('./routes/api');
     app.use('/api', api);
 
-Veiller à ce que `app.use('/api', api);` soit bien appelé AVANT `app.use('/', routes);`.
+Veillez à ce que `app.use('/api', api);` soit bien appelé AVANT `app.use('/', routes);`.
 
 Créer la route pour le login
 ----------------------------
@@ -128,9 +115,23 @@ Je vais un peu plus vite dans cette section, qui reprend la même logique que la
 
 Supposons qu'on veuille créer un CMS et qu'on a besoin de stocker des pages. Le modèle de données déclaré avec Mongoose est le suivant (dans `models/page.js`) :
 
+```
 Page
   - title
   - url
   - content
   - menuIndex
   - date
+```
+
+### Routes
+
+Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, puis de les authentifier et de les déconnecter.
+
+    GET /api/pages - liste des pages
+    POST /api/pages/add
+    POST /api/pages/update
+    GET /api/pages/delete/:id
+    GET /api/pages/admin-details/:id
+
+Créer le fichier .
