@@ -33,7 +33,7 @@ Authentification
 ----------------
 
 Modèle de données
-+++++++++++++++++
+#################
 
 Pour implémenter une authentification custom, il faut avant tout déclarer un modèle de données pour stocker les utilisateurs.
 
