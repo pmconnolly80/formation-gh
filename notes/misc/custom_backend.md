@@ -22,6 +22,8 @@ Cet article présente la création d'un backend sommaire mais fonctionnel basé 
 
 Seuls les points les plus importants ont été détaillés ci-dessous. Les chemins de fichiers cités dans l'article font référence au contenu du ZIP.
 
+
+
 Code source
 -----------
 
@@ -29,8 +31,11 @@ Le code source de l'application complète peut être téléchargé dans le zip j
 
 Le point d'entrée est l'application Node.js représenté par le fichier `app.js` à la racine du ZIP.
 
+
+
 Authentification
 ----------------
+
 
 ### Modèle de données
 
@@ -44,6 +49,7 @@ adminUser
   - password
 ```
 
+
 ### Routes
 
 Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, puis de les authentifier et de les déconnecter :
@@ -54,29 +60,19 @@ Les routes suivantes doivent être exposées (avec les méthodes HTTP correspond
 
 Voir la déclaration détaillée des routes dans `routes/api.js`.
 
-Les routes sont rattachées à l'application principale (dans `app.js`) grâce aux lignes suivantes :
+Les routes sont rattachées à l'application principale (`app.js`) grâce aux lignes suivantes :
 
     var api = require('./routes/api');
     app.use('/api', api);
 
 Veillez à ce que `app.use('/api', api);` soit bien appelé AVANT `app.use('/', routes);`.
 
-Créer la route pour le login
-----------------------------
+Le code associé aux routes login/logout fonctionne de la manière suivante :
+- login: Crée une variable de session indiquant si l'utilisateur est parvenu à s'identifier.
+- logout: Détruit la variable de session.
 
-Ajouter le code dans `routes/api.js`:
 
-    router.post('/login', function() { ... });
-
-Créer la route pour le logout
------------------------------
-
-Le code détruit la session en cours.
-
-    router.get('/logout', function() { ... });
-
-Writing the sessionCheck middleware
------------------------------------
+### Créer un middleware sessionCheck
 
 The next step is to create our middleware function that does a session check.
 
@@ -89,29 +85,21 @@ Puis, dans `app.js` :
     var session = require('express-session');
     app.use(session());
 
-Créer la fonction `sessionCheck()`.
-
-Protéger les routes qui doivent l'être en ajoutant cette fonction, par exemple :
-
-    router.post('/pages/add', sessionCheck, function(request, response) { ... });
+Voir le code la fonction `sessionCheck()` : si une variable de session indiquant que l'utilisateur est identifié existe, alors l'accès est autorisé. Sinon, l'accès est refusé.
 
 
-Securing your admin section
-===========================
-
-IMPORTANT. Sécuriser :
-- L'interface d'admin sur le client
-- Les APIs serveur
-
-
-Arrêter et redémarrer le serveur avant de tester une URL comme http://localhost:3000/api.
 
 Data Store
 ----------
 
-En plus de l'authentification, une des fonctionnalités typiques de backend est de permettre à JavaScript de communiquer avec une base de données (aka data store).
+En plus de l'authentification, une des fonctionnalités typiques de backend est de permettre à l'appli AngularJS de communiquer avec une base de données (aka *data store*).
+
+L'idée est encore une fois d'exposer des URLs qui permettront à AngularJS d'interagir avec le data store via des requêtes HTTP.
 
 Je vais un peu plus vite dans cette section, qui reprend la même logique que la précédente.
+
+
+### Modèle de données
 
 Supposons qu'on veuille créer un CMS et qu'on a besoin de stocker des pages. Le modèle de données déclaré avec Mongoose est le suivant (dans `models/page.js`) :
 
@@ -124,14 +112,24 @@ Page
   - date
 ```
 
+
 ### Routes
 
 Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, puis de les authentifier et de les déconnecter.
 
-    GET /api/pages - liste des pages
+    GET /api/pages
     POST /api/pages/add
     POST /api/pages/update
     GET /api/pages/delete/:id
     GET /api/pages/admin-details/:id
 
-Créer le fichier .
+
+
+### Protéger les routes qui doivent l'être
+
+L'étape suivante est de protéger les routes qui doivent l'être en ajoutant le middleware `sessionCheck` au niveau de la déclaration des routes.
+
+Par exemple, seuls les utilisateurs identifiés peuvent créer des pages :
+
+    router.post('/pages/add', sessionCheck, function(request, response) { ... });
+
