@@ -129,7 +129,7 @@ Bien-sûr, à chaque route il faudra associer le code effectuant les opérations
 
 ### Protéger les routes qui doivent l'être
 
-L'étape suivante est de protéger les routes qui doivent l'être en ajoutant le middleware `sessionCheck` au niveau de la déclaration des routes.
+Enfin, il faut protéger les routes qui doivent l'être en ajoutant le middleware `sessionCheck` au niveau de leur déclaration.
 
 Par exemple, seuls les utilisateurs identifiés peuvent créer des pages :
 
