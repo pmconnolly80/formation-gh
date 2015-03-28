@@ -32,19 +32,19 @@ Le point d'entrée est l'application Node.js représenté par le fichier `app.js
 Authentification
 ----------------
 
-Modèle de données
-#################
+### Modèle de données
 
 Pour implémenter une authentification custom, il faut avant tout déclarer un modèle de données pour stocker les utilisateurs.
 
 Dans sa version la plus simple (voir `models/admin-users.js`) :
 
+```
 adminUser
   - username
   - password
+```
 
-Routes
-++++++
+### Routes
 
 Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, puis de les authentifier et de les déconnecter :
 
