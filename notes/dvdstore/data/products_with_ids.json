@@ -1,0 +1,74 @@
+[
+  {
+    "categories": ["Drame", "Judiciaire"],
+    "description": "L'épouse d'un homme politique voit sa vie bouleversée par l'incarcération de son mari à la suite d'un scandale sexuel et une affaire de corruption largement relayés par les médias.",
+    "name": "The Good Wife - Saison 4",
+    "price": 35.99,
+    "id": "05af70919155f8fc",
+    "cover": "the_good_wife.jpg"
+  },
+  {
+    "categories": ["Science-Fiction"],
+    "description": "Äkta Människor (\"les véritables humains\") se situe dans un monde parallèle où les robots humanoïdes (Hubot) sont devenus des machines courantes dans la société.",
+    "name": "Äkta människor - Saison 1",
+    "price": 29.99,
+    "id": "3d31d81b218c98ef",
+    "cover": "real_humans.jpg"
+  },
+  {
+    "categories": ["Drame", "Thriller"],
+    "description": "Frank Underwood, homme politique rusé et vieux briscard de Washington, est prêt à tout pour conquérir le poste \"suprême\"...",
+    "name": "House of Cards - Saisons 1 et 2",
+    "price": 27.99,
+    "id": "437615faf1d38815",
+    "cover": "house_of_cards.jpg"
+  },
+  {
+    "categories": ["Drame", "Romance"],
+    "description": "De joies en déceptions, les vies amoureuses et professionnelles de Laure, Caroline et Jessica ne manquent jamais de rebondissements sous le soleil de Saint Tropez !",
+    "name": "Sous le soleil - Coffret 10 DVD",
+    "price": 59.00,
+    "id": "93c9cc08ac2f28d4",
+    "cover": "sous_le_soleil.jpg"
+  },
+  {
+    "categories": ["Drame", "Historique"],
+    "description": "Les héritiers de Downton Abbey ayant péri lors du naufrage du Titanic, la famille Crawley se retrouve dans une position délicate, les trois descendantes ne pouvant prétendre au titre de Lord Grantham.",
+    "name": "Downton Abbey - Saison 4",
+    "price": 24.99,
+    "id": "ad4e64b38baa088f",
+    "cover": "downton_abbey.jpg"
+  },
+  {
+    "categories": ["Drame", "Thriller"],
+    "description": "Huit ans après la disparition de deux soldats américains lors de l'invasion de Bagdad, l'un d'entre eux réapparaît, seul survivant alors que tout le monde le pensait mort depuis longtemps.",
+    "name": "Homeland - Saison 3",
+    "price": 29.99,
+    "id": "b9e8e55c1ecc0b63",
+    "cover": "homeland.jpg"
+  },
+  {
+    "categories": ["Drame", "Comédie"],
+    "description": "Un an dans une prison pour femmes de sécurité minimale dans le Connecticut à la rencontre de personnages farfelus mais attachants...",
+    "name": "Orange Is the New Black - Saison 1",
+    "price": 15.97,
+    "id": "32c2355f9a617bbd",
+    "cover": "oitnb.jpg"
+  },
+  {
+    "categories": ["Drame", "Fantastique"],
+    "description": "Il y a très longtemps, à une époque oubliée, une force a détruit l'équilibre des saisons. Dans un pays où l'été peut durer plusieurs années et l'hiver toute une vie, des forces sinistres et surnaturelles se pressent aux portes du Royaume des Sept Couronnes.",
+    "name": "Game of Thrones - Saison 4",
+    "price": 39.99,
+    "id": "5241512218f73a26",
+    "cover": "game_of_thrones.jpg"
+  },
+  {
+    "categories": ["Drame", "Espionnage", "Action"],
+    "description": "Responsable de la Cellule Anti-Terroriste de Los Angeles, Jack Bauer a 24 heures pour mener sa mission à bien et protéger les siens du danger qui les menacent...",
+    "name": "24 heures chrono - Saison 9",
+    "price": 29.99,
+    "id": "59166228d70f8858",
+    "cover": "24h.jpg"
+  }
+]
