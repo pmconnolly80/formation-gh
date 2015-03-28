@@ -20,7 +20,7 @@ La décision custom vs clé-en-main dépend des compétences de l'équipe de dé
 
 Cet article présente la création d'un backend sommaire mais fonctionnel basé sur MongoDB, Mongoose, ExpressJS et Node.js.
 
-Le code final peut être téléchargé dans le zip joint. Seuls les points les plus importants ont été détaillés ci-dessous.
+Le code final peut être téléchargé dans le zip joint [custom_backend_example.zip]. Seuls les points les plus importants ont été détaillés ci-dessous.
 
 Modèles de données
 ------------------
