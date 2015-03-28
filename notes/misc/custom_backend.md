@@ -52,7 +52,7 @@ adminUser
 
 ### Routes
 
-Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, puis de les authentifier et de les déconnecter :
+Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, de les authentifier et de les déconnecter :
 
     POST /add-user
     POST /login
@@ -68,15 +68,15 @@ Les routes sont rattachées à l'application principale (`app.js`) grâce aux li
 Veillez à ce que `app.use('/api', api);` soit bien appelé AVANT `app.use('/', routes);`.
 
 Le code associé aux routes login/logout fonctionne de la manière suivante :
-- login: Crée une variable de session indiquant si l'utilisateur est parvenu à s'identifier.
+- login: Crée une variable de session si l'utilisateur est parvenu à s'identifier.
 - logout: Détruit la variable de session.
 
 
 ### Créer un middleware sessionCheck
 
-The next step is to create our middleware function that does a session check.
+La fonction `sessionCheck` vérifie simplement que la variable de session créée lors de l'authentification existe ou non.
 
-Installer le module session de ExpressJS :
+Avant de créer cette fonction, il faut d'abord installer le module session de ExpressJS :
 
     npm install express-session --save
 
@@ -85,7 +85,7 @@ Puis, dans `app.js` :
     var session = require('express-session');
     app.use(session());
 
-Voir le code la fonction `sessionCheck()` : si une variable de session indiquant que l'utilisateur est identifié existe, alors l'accès est autorisé. Sinon, l'accès est refusé.
+Voir enfin le code la fonction `sessionCheck()` : si une variable de session indiquant que l'utilisateur est identifié existe, alors l'accès est autorisé. Sinon, un code d'erreur "Accès non autorisé" est renvoyé.
 
 
 
@@ -115,13 +115,15 @@ Page
 
 ### Routes
 
-Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, puis de les authentifier et de les déconnecter.
+Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de gérer les pages :
 
     GET /api/pages
     POST /api/pages/add
     POST /api/pages/update
     GET /api/pages/delete/:id
     GET /api/pages/admin-details/:id
+
+Bien-sûr, à chaque route il faudra associer le code effectuant les opérations adéquates sur la base de données. Vous verrez en regardant le source du code que Mongoose facilite bien toutes les opérations sur la base de données.
 
 
 
