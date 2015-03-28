@@ -20,40 +20,52 @@ La décision custom vs clé-en-main dépend des compétences de l'équipe de dé
 
 Cet article présente la création d'un backend sommaire mais fonctionnel basé sur MongoDB, Mongoose, ExpressJS et Node.js.
 
-Le code final peut être téléchargé dans le zip joint [custom_backend_example.zip](custom_backend_example.zip). Seuls les points les plus importants ont été détaillés ci-dessous.
+Seuls les points les plus importants ont été détaillés ci-dessous. Les chemins de fichiers cités dans l'article font référence au contenu du ZIP.
 
-Modèles de données
-------------------
+Code source
+-----------
 
-Ds le bouquin, il utilise Mongoose.
+Le code source de l'application complète peut être téléchargé dans le zip joint [custom_backend_example.zip](custom_backend_example.zip).
 
-Page
-  - title
-  - url
-  - content
-  - menuIndex
-  - date
+Le point d'entrée est l'application Node.js représenté par le fichier `app.js` à la racine du ZIP.
+
+Authentification
+----------------
+
+Modèle de données
++++++++++++++++++
+
+Pour implémenter une authentification custom, il faut avant tout déclarer un modèle de données pour stocker les utilisateurs.
+
+Dans sa version la plus simple (voir `models/admin-users.js`) :
 
 adminUser
   - username
   - password
 
+Routes
+++++++
+
+Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, puis de les authentifier et de les déconnecter :
+
+    POST /add-user
+    POST /login
+    GET /logout
+
+Voir la déclaration détaillée des routes dans `routes/api.js`.
 
 Routes
-------
+++++++
 
-GET /api/ - Welcome
-GET /api/pages - liste des pages
-POST /api/pages/add
-POST /api/pages/update
-GET /api/pages/delete/:id
-GET /api/pages/admin-details/:id (backend)
-GET /api/pages/details/:url (frontend)
-POST /api/add-user
-POST /login
-GET /logout
+Les routes suivantes doivent être exposées (avec les méthodes HTTP correspondantes) pour permettre à l'application AngularJS de créer des utilisateurs, puis de les authentifier et de les déconnecter.
 
-Créer le fichier `routes/api.js`.
+    GET /api/pages - liste des pages
+    POST /api/pages/add
+    POST /api/pages/update
+    GET /api/pages/delete/:id
+    GET /api/pages/admin-details/:id
+
+Créer le fichier .
 
 Ajouter les lignes suivantes dans `app.js` :
 
@@ -106,3 +118,19 @@ IMPORTANT. Sécuriser :
 
 
 Arrêter et redémarrer le serveur avant de tester une URL comme http://localhost:3000/api.
+
+Data Store
+----------
+
+En plus de l'authentification, une des fonctionnalités typiques de backend est de permettre à JavaScript de communiquer avec une base de données (aka data store).
+
+Je vais un peu plus vite dans cette section, qui reprend la même logique que la précédente.
+
+Supposons qu'on veuille créer un CMS et qu'on a besoin de stocker des pages. Le modèle de données déclaré avec Mongoose est le suivant (dans `models/page.js`) :
+
+Page
+  - title
+  - url
+  - content
+  - menuIndex
+  - date
