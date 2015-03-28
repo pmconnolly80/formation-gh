@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Démo formulaire</title>
+  <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+  <link href="../assets/css/bootstrap-theme.css" rel="stylesheet" />
+  <script src="../assets/js/angular.js"></script>
+  <script>
+    angular.module('myApp', [])
+      .controller('formController', function($scope) {
+        $scope.phoneTypes = ['maison', 'travail'];
+        var phones = [{type: '', number: ''}];
+        $scope.data = {
+          phones: phones
+        };
+        $scope.addPhone = function() {
+          phones.push({type: '', number: ''});
+          $scope.data.phones = phones;
+        };
+        $scope.deletePhone = function(delta) {
+          phones.splice(delta, 1);
+          $scope.data.phones = phones;
+        };
+      });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+
+        <form role="form" ng-controller="formController">
+
+          <h3>Champ dépendant</h3>
+
+          <div class="form-group">
+            <label>Type de client</label>
+            <div class="radio">
+              <label>
+                <input type="radio" name="customerType" value="private" ng-model="data.customerType">
+                Particulier
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="customerType" value="company" ng-model="data.customerType">
+                Société
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="data.customerType == 'company'">
+            <label>Numéro de TVA</label>
+            <input type="text" class="form-control" placeholder="Numéro de TVA" ng-model="data.tva">
+          </div>
+
+          <h3>Champ dynamique</h3>
+
+          <div class="form-group">
+            <label>Téléphones</label>
+            <div ng-repeat="phone in data.phones">
+              <select ng-model="phone.type" ng-options="phoneType for phoneType in phoneTypes">
+                <option value="">---</option>
+              </select>
+              <input type="text" ng-model="phone.number" placeholder="Numéro">
+              <button type="button" ng-click="deletePhone($index)" class="btn btn-default">X</button>
+            </div>
+            <button type="button" ng-click="addPhone()" class="btn btn-default">Ajouter téléphone</button>
+          </div>
+
+          <pre>{{data|json}}</pre>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
