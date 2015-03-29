@@ -38,7 +38,7 @@ DOC: http://devcenter.kinvey.com/angular/guides/users
 
 **IMPORTANT.** Toute application Kinvey a un utilisateur courant (*active user*).
 
-- Un seul utilisateur courant à la fois = personne qui utilise l'appli.
+- Un seul utilisateur courant à la fois == personne qui utilise l'appli.
 - Doit être créé explicitement (avec un username/pwd par ex) ou programmatiquement (pour les applications ne demandant pas d'authentification).
 - Tous les appels d'API sont fait au nom de l'utilisateur courant --> sécurité. Par défaut, données d'un user = accessibles en lecture, mais pas en écriture par les autres utilisateurs.
 - Est représenté par un objet JS litéral :
@@ -63,6 +63,12 @@ Kinvey gère de nombreuses choses pour nous :
 - Login / Logout.
 - Vérification d'email, mot de passe oublié.
 - Authentification via les réseaux sociaux (Facebook, Google+, Twitter...).
+
+Plusieurs méthodes du SDK Kinvey facilitent la gestion des utilisateurs :
+- `$kinvey.User.signup()`
+- `$kinvey.User.login()`
+- `$kinvey.User.logout()`
+- ...
 
 
 Le data Store
