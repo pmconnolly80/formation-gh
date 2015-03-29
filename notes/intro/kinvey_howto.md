@@ -55,9 +55,12 @@ DOC: http://devcenter.kinvey.com/angular/guides/users
 - Peut être récupéré dans le code via `$kinvey.getActiveUser()`.
 
 
-### Kinvey nous facilite l'authentification
+Kinvey nous facilite l'authentification
+---------------------------------------
 
-Kinvey gère de nombreuses choses pour nous :
+Au-delà de l'utilisateur courant, Kinvey nous permet de gérer les utilisateurs d'une application en général.
+
+Fonctionnalités proposées :
 - Modèle de données `User` (username, password, email).
 - Création ("signup") et suppression ("destroy") d'un user.
 - Login / Logout.
@@ -78,7 +81,7 @@ Le data Store
 
 DOC: http://devcenter.kinvey.com/angular/guides/datastore
 
-L'unité élémentaire de données est une **entité**, et les entités de même type sont regroupées en **collections**. Une entité est un ensemble de paires **clé-valeur stockées au format JSON**.
+L'unité élémentaire de données est une **entité**, et les entités de même type sont regroupées en **collections**. Une entité est un ensemble de **paires clé-valeur stockées au format JSON**.
 
 **IMPORTANT.** Quasiment toutes les opérations sur le data store renvoient des promesses, JAMAIS DES DONNÉES DIRECTEMENT.
 
