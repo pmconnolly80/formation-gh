@@ -30,9 +30,9 @@ Pourquoi ne pas utiliser notre propre base de données ?
 
 Nous pourrions installer une base de données sur notre machine de développement comme nous l'avons fait pour Node.js. Le choix le plus répandu est probablement **MongoDB**.
 
-Cela dit, il nous manquerait un composant essentiel : une interface REST permettant à notre application AngularJS de communiquer avec la base de données via des requêtes HTTP. N'oublions pas que dans une application web traditionnelle (par ex, PHP/MySQL)
+Cela dit, il nous manquerait un composant essentiel : une **interface REST** permettant à l'application AngularJS de communiquer avec la base de données via des requêtes HTTP. N'oublions pas que dans une application web traditionnelle (par ex, PHP/MySQL) :
 * Le code ET la base de données s'exécutent côté serveur, et
-* Les langages serveur proposent tous des commandes ou des librairies pour interagir facilement avec une base de données.
+* Les langages serveur proposent tous des commandes ou des librairies pour interagir facilement avec la base de données.
 
 Avec AngularJS et les applications JavaScript en général, le code s'exécute côté client alors que la base de données s'exécute côté serveur. Les **APIs REST** font le trait d'union entre les deux. Certaines bases de données proposent également un driver JavaScript, mais c'est plutôt rare.
 
