@@ -1,8 +1,10 @@
 Attendre la fin d'une tâche asynchrone avant de poursuivre
 ==========================================================
 
-A. Retarder l'exécution du SDK Kinvey
--------------------------------------
+A. Retarder l'exécution du code utilisant le SDK Kinvey
+-------------------------------------------------------
+
+On pourrait wrapper le code qui utilise le SDK Kinvey dans un `$timeout`. Bien-sûr, c'est une bidouille qui va fonctionner de manière aléatoire. Mais elle prouve que quand le code s'exécute dans la bonne séquence, il fonctionne.
 
 Supposons qu'on se trouve dans une directive qui affiche le nom de l'utilisateur courant :
 
