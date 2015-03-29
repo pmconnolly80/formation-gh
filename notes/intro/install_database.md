@@ -39,7 +39,9 @@ Avec AngularJS et les applications JavaScript en général, le code s'exécute c
 En conclusion, cela aurait dépassé le cadre de la formation d'installer une base de données et d'implémenter l'API REST permettant de la requêter. Voici les tâches qu'il aurait fallu effectuer :
 - Identifier/Créer les différents modèles de données dans la base.
 - Créer les routes exposant les opérations sur ces données (`GET /data`, `GET /data/:id`, `POST /data`...).
-- Créer le code correspondant à ces routes (c. à d. le code qui interagit effectivement avec la BDD).
-- Refaire la même chose pour l'authentification, en créant en plus un mécanisme de persistence du statut de l'utilisateur (session/cookie, JSON Web Tokens...).
+- Créer le code exécuté lorsque ces routes sont requêtées (c. à d. le code qui interagit effectivement avec la BDD).
+- Gérer la sécurité, c. à d. garantir que seuls certains utilisateurs ont accès à certaines opérations sur certaines routes. Cela implique probablement de gérer une mécanique d'authentification, de gérer la persistence du statut de l'utilisateur (session/cookie, JSON Web Tokens...), etc.
 
-Voilà pourquoi nous utilisons Kinvey qui propose toutes ces fonctionnalités clé-en-main et en version gratuite.
+On voit bien que le travail est assez important, même si certaines librairies peuvent en prendre en charge une partie. Par exemple, http://passportjs.org/ est une librairie d'authentification pour Node.js.
+
+Voilà pourquoi j'ai choisi Kinvey pour la formation, qui propose toutes ces fonctionnalités clé-en-main et en version gratuite.
