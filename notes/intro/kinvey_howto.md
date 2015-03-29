@@ -1,6 +1,10 @@
 Utiliser Kinvey dans un projet AngularJS
 ========================================
 
+
+Installer Kinvey
+----------------
+
 NB. L'article qui suit suppose que vous avez créé un compte et une "application" sur http://www.kinvey.com/.
 
 Pour utiliser Kinvey dans un projet AngularJS :
@@ -55,8 +59,8 @@ DOC: http://devcenter.kinvey.com/angular/guides/users
 - Peut être récupéré dans le code via `$kinvey.getActiveUser()`.
 
 
-Kinvey nous facilite l'authentification
----------------------------------------
+Gestions des utilisateurs et de l'authentification
+--------------------------------------------------
 
 Au-delà de l'utilisateur courant, Kinvey nous permet de gérer les utilisateurs d'une application en général.
 
