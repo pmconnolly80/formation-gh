@@ -30,3 +30,12 @@ L'utilisateur courant est-il authentifié ?
 Afficher le nom de l'utilisateur courant dans la vue principale (quick & dirty).
 
 L'objectif pour l'instant est juste que l'UI reflète si l'utilisateur est loggé ou non.
+
+Indice :
+
+```js
+var user = $kinvey.getActiveUser();
+if (null !== user) {
+  var currentUser = user.username;
+}
+```
