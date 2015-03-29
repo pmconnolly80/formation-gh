@@ -3,7 +3,7 @@ Formation AngularJS - Base de données
 
 L'application que nous allons développer pendant la formation utilise une base de données. Pour simplifier le travail d'installation, j'ai choisi d'utiliser **Kinvey** (http://www.kinvey.com/) qui nous propose gratuitement une base de données NoSQL dans le cloud, accessible via une librairie JavaScript compatible AngularJS (et aussi via une API REST si besoin). C'est parfait pour les besoins de notre application.
 
-(Voir [#pourquoi-kinvey-])
+(Voir aussi ci-dessous [#pourquoi-pas-notre-propre-base-de-données-](Pourquoi pas notre propre base de données ?) et [#pourquoi-kinvey-](Pourquoi Kinvey ?).)
 
 
 Création d'un compte sur Kinvey.com
@@ -16,7 +16,7 @@ Création d'un compte sur Kinvey.com
 
 
 Pourquoi pas notre propre base de données ?
--------------------------------------------------------
+-------------------------------------------
 
 Nous pourrions installer une base de données sur notre machine de développement comme nous l'avons fait pour Node.js. Le choix le plus répandu est probablement **MongoDB**.
 
