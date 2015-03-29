@@ -64,7 +64,9 @@ Kinvey gère de nombreuses choses pour nous :
 - Vérification d'email, mot de passe oublié.
 - Authentification via les réseaux sociaux (Facebook, Google+, Twitter...).
 
-Plusieurs méthodes du SDK Kinvey facilitent la gestion des utilisateurs :
+Imaginez le travail si on avait dû réaliser toutes ces tâches manuellement !
+
+Ici, il nous suffit d'utiliser les méthodes correspondantes dans le SDK Kinvey :
 - `$kinvey.User.signup()`
 - `$kinvey.User.login()`
 - `$kinvey.User.logout()`
