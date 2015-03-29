@@ -16,4 +16,9 @@ Créer un service d'authentification
 Dans `auth/services.js` :
 
 - Créez un service `AuthService` qui implémente 3 méthodes `login()`, `logout()` et `signup()`. Ces méthodes appelleront les méthodes correspondantes de l'API Kinvey.
-- Dans les contrôleurs `LoginCtrl` et `RegisterCtrl`, implémentez le code des méthodes appelées lorsque les formulaires de login et d'inscription sont soumis. Ces méthodes utiliseront le service `AuthService` créé à l'étape précédente.
+
+Dans `auth/controllers.js` :
+
+- Dans les contrôleurs `LoginCtrl` et `RegisterCtrl`, implémentez le code des méthodes appelées lorsque les formulaires de login et d'inscription sont soumis. Ces méthodes devront utiliser le service `AuthService` créé à l'étape précédente.
+- En cas de succès du login ou de l'inscription, redirigez l'utilisateur vers la page d'accueil.
+- En cas d'erreur du login ou de l'inscription, contentez-vous de logger l'erreur pour l'instant (`$log.error()` ou `console.error()`).
