@@ -3,7 +3,7 @@ Formation AngularJS - Base de données
 
 L'application que nous allons développer pendant la formation utilise une base de données. Pour simplifier le travail d'installation, j'ai choisi d'utiliser **Kinvey** (http://www.kinvey.com/) qui nous propose gratuitement une base de données NoSQL dans le cloud, accessible via une librairie JavaScript compatible AngularJS (et aussi via une API REST si besoin). C'est parfait pour les besoins de notre application.
 
-(Voir aussi ci-dessous [#pourquoi-pas-notre-propre-base-de-données-](Pourquoi pas notre propre base de données ?) et [#pourquoi-kinvey-](Pourquoi Kinvey ?).)
+(Voir aussi ci-dessous [Pourquoi pas notre propre base de données ?](#pourquoi-pas-bdd) et [Pourquoi Kinvey ?](#pourquoi-kinvey).)
 
 
 Création d'un compte sur Kinvey.com
@@ -15,6 +15,7 @@ Création d'un compte sur Kinvey.com
 - Copiez ces infos dans le fichier `exos_starters/api_keys.js` et visitez la page `exos_starters/kinvey_ping.html` dans votre navigateur. Cliquez sur le bouton "Ping Kinvey" et confirmez que vous voyez un message d'alerte "Kinvey Ping Success" qui se termine par "hello [nom-de-votre-app]". Si le message dit autre chose, vérifiez que vous avez bien saisi
 
 
+<a name="pourquoi-pas-bdd"></a>
 Pourquoi pas notre propre base de données ?
 -------------------------------------------
 
@@ -35,6 +36,7 @@ En conclusion, cela aurait dépassé le cadre de la formation d'installer une ba
 On voit bien que le travail est assez important, même si certaines librairies peuvent prendre en charge une partie. Par exemple, http://passportjs.org/ est une librairie d'authentification pour Node.js.
 
 
+<a name="pourquoi-kinvey"></a>
 Pourquoi Kinvey ?
 -----------------
 
