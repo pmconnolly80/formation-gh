@@ -14,13 +14,15 @@ Création d'un compte sur Kinvey.com
 - Allez sur le dashboard de votre app et prenez note du APP ID et APP SECRET (en haut à droite).
 - Copiez ces infos dans le fichier `exos_starters/api_keys.js` et visitez la page `exos_starters/kinvey_ping.html` dans votre navigateur. Cliquez sur le bouton "Ping Kinvey" et confirmez que vous voyez un message d'alerte "Kinvey Ping Success" qui se termine par "hello [nom-de-votre-app]".
 
+Si cela fonctionne, vous êtes prêt pour la formation ! ;-)
+
 Si cela ne fonctionne pas, vérifiez les points suivants :
 - Avez-vous copié votre APP ID et votre APP SECRET correctement ?
 - Essayez-vous de consulter la page `exos_starters/kinvey_ping.html` en passant par un serveur (c'est ce qu'il faut faire), et pas d'ouvrir le fichier directement dans votre navigateur ?
 - Y a-t-il des erreurs dans la console JavaScript qui vous donnent des pistes ?
-- Voir la doc de Kinvey : http://devcenter.kinvey.com/angular/guides/getting-started
+- Voir aussi la doc de Kinvey : http://devcenter.kinvey.com/angular/guides/getting-started
 
-Si le choix d'un service dans le cloud pour faire la formation — et de Kinvey en particulier — vous intrigue, continuez à lire. Sinon, vous êtes prêt pour la formation ! ;-)
+Si le choix d'un service dans le cloud pour faire la formation — et de Kinvey en particulier — vous intrigue, continuez à lire.
 
 
 <a name="pourquoi-pas-bdd"></a>
