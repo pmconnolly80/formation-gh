@@ -3,11 +3,15 @@ Formation AngularJS - Base de données
 
 L'application que nous allons développer pendant la formation utilise une base de données. Pour simplifier le travail d'installation, j'ai choisi d'utiliser Kinvey (http://www.kinvey.com/) qui nous propose gratuitement une base de données NoSQL dans le cloud accessible via une librairie JavaScript compatible AngularJS (et aussi via une API REST si besoin). C'est parfait pour les besoins de notre application.
 
+
 Création d'un compte sur Kinvey.com
 -----------------------------------
 
 - Si vous n'avez pas déjà un compte Kinvey, rendez-vous sur http://www.kinvey.com pour en créer un gratuitement.
-- Allez ensuite sur la console Kinvey (https://console.kinvey.com/apps) et créez une nouvelle application appelée `ngworkshop`, cliquez votre nom d'utilisateur en haut à droite (attention à ne pas confondre "user" et "account"). Vous devriez arriver sur une page qui affiche votre API Key. Prenez-en note, car vous en aurez besoin au cours de la formation.
+- Allez ensuite sur la console Kinvey (https://console.kinvey.com/apps) et créez une nouvelle application appelée `ngworkshop`,
+- Allez sur le dashboard de votre app et prenez note du APP ID et APP SECRET (en haut à droite).
+- Copiez ces infos dans le fichier `exos_starters/api_keys.js` et visitez la page `exos_starters/kinvey_ping.html` dans votre navigateur. Cliquez le bouton "Ping Kinvey" et confirmez que vous voyez un message d'alerte "Kinvey Ping Success" qui se termine par "hello [nom-de-votre-app]".
+
 
 Pourquoi Kinvey ?
 -----------------
@@ -20,6 +24,7 @@ Une autre solution populaire est MongoLab (https://mongolab.com/) qui propose de
 
 D'autres backends as a service seront évoqués au cours de la formation.
 
+
 Pourquoi ne pas utiliser notre propre base de données ?
 -------------------------------------------------------
 
@@ -31,4 +36,9 @@ Cela dit, il nous manquerait un composant essentiel : une interface REST permett
 
 Avec AngularJS et les applications JavaScript en général, le code s'exécute côté client alors que la base de données s'exécute côté serveur. Les **APIs REST** font le trait d'union entre les deux. Certaines bases de données proposent également un driver JavaScript, mais c'est plutôt rare.
 
-En conclusion, cela aurait dépassé le cadre de la formation d'installer une base de données et d'implémenter l'API REST permettant de la requêter. Voilà pourquoi nous utilisons Kinvey qui propose ce service clé-en-main et en version gratuite.
+En conclusion, cela aurait dépassé le cadre de la formation d'installer une base de données et d'implémenter l'API REST permettant de la requêter. Il aurait fallu :
+- Créer les différents modèles pour stocker les données.
+- Créer les routes exposant les opérations sur ces données et le code permettant de les manipuler.
+- Refaire la même chose pour l'authentification, en créant en plus un mécanisme de persistence du statut de l'utilisateur (session/cookie, JSON Web Tokens...).
+
+Voilà pourquoi nous utilisons Kinvey qui propose toutes ces fonctionnalités clé-en-main et en version gratuite.
