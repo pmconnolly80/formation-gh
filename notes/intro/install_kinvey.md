@@ -12,7 +12,15 @@ Création d'un compte sur Kinvey.com
 - Si vous n'avez pas déjà un compte Kinvey, rendez-vous sur http://www.kinvey.com pour en créer un gratuitement.
 - Allez ensuite sur la console Kinvey (https://console.kinvey.com/apps) et créez une nouvelle application appelée `ngworkshop`.
 - Allez sur le dashboard de votre app et prenez note du APP ID et APP SECRET (en haut à droite).
-- Copiez ces infos dans le fichier `exos_starters/api_keys.js` et visitez la page `exos_starters/kinvey_ping.html` dans votre navigateur. Cliquez sur le bouton "Ping Kinvey" et confirmez que vous voyez un message d'alerte "Kinvey Ping Success" qui se termine par "hello [nom-de-votre-app]". Si le message dit autre chose, vérifiez que vous avez bien saisi
+- Copiez ces infos dans le fichier `exos_starters/api_keys.js` et visitez la page `exos_starters/kinvey_ping.html` dans votre navigateur. Cliquez sur le bouton "Ping Kinvey" et confirmez que vous voyez un message d'alerte "Kinvey Ping Success" qui se termine par "hello [nom-de-votre-app]".
+
+Si cela ne fonctionne pas, vérifiez les points suivants :
+- Avez-vous copié votre APP ID et votre APP SECRET correctement ?
+- Essayez-vous de consulter la page `exos_starters/kinvey_ping.html` en passant par un serveur (c'est ce qu'il faut faire), et pas d'ouvrir le fichier directement dans votre navigateur ?
+- Y a-t-il des erreurs dans la console JavaScript qui vous donnent des pistes ?
+- Voir la doc de Kinvey : http://devcenter.kinvey.com/angular/guides/getting-started
+
+Si le choix d'un service dans le cloud pour faire la formation — et de Kinvey en particulier — vous intrigue, continuez à lire. Sinon, vous êtes prêt pour la formation ! ;-)
 
 
 <a name="pourquoi-pas-bdd"></a>
