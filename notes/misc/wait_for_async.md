@@ -1,14 +1,16 @@
 Attendre la fin d'une tâche asynchrone avant de poursuivre
 ==========================================================
 
-On suppose qu'on veut utiliser une fonction du SDK Kinvey (par exemple, requêter le data store avec `$kinvey.DataStore.find()`), mais que cette fonction n'est utilisable qu'une fois le SDK Kinvey initialisé.
+On veut appeler une fonction du SDK Kinvey (par exemple, requêter le data store avec `$kinvey.DataStore.find()`), mais cette fonction n'est utilisable qu'une fois le SDK initialisé, c'est à dire une fois la promesse renvoyée par `$kinvey.init()` résolue.
 
-Pour rappel, `$kinvey.init()` renvoie une promesse qui réussit si l'initialisation réussit et qui échoue si l'initialisation échoue.
+Cet article balaye les différentes manières d'y parvenir.
 
-A. Retarder l'exécution du code utilisant le SDK Kinvey
--------------------------------------------------------
+Dans les scénarios ci-dessous, toute référence à "du code" signifie "du code utilisant le SDK Kinvey".
 
-On pourrait wrapper le code qui utilise le SDK Kinvey dans un `$timeout`. Bien-sûr, c'est une bidouille qui va fonctionner de manière aléatoire. Mais elle prouve que quand le code s'exécute dans la bonne séquence, il fonctionne.
+A. Retarder l'exécution du code
+-------------------------------
+
+On pourrait wrapper le code qui utilise le SDK Kinvey dans un `$timeout`. Bien-sûr, c'est une bidouille qui va fonctionner de manière aléatoire. Mais elle prouve que quand le code s'exécute dans le bon ordre, il fonctionne.
 
 Supposons qu'on se trouve dans une directive qui affiche le nom de l'utilisateur courant :
 
@@ -28,7 +30,9 @@ return {
 B. Conditionner le code à une promesse
 --------------------------------------
 
-Supposons qu'on se trouve dans un contrôleur qui doit attendre que Kinvey soit initialisé pour envoyer une requête au datastore :
+On peut utiliser la promesse renvoyée par `$kinvey.init()` pour déclencher le code à exécuter.
+
+Supposons qu'on se trouve dans un contrôleur qui doit attendre que Kinvey soit initialisé pour envoyer une requête au data store :
 
 ```js
 ...
@@ -44,8 +48,12 @@ kinveyService.init().then(function() {
 ...
 ```
 
-C. Impossible
--------------
+Le problème est que l'initialisation n'a lieu qu'une seule fois, et que l'appel à `$kinvey.init()` se trouve dans le bloc `run()` de l'application (pas dans les contrôleurs, là où la promesse retournée serait utile).
+
+C. Initialiser les routes après l'initialisation de Kinvey
+----------------------------------------------------------
+
+Impossible.
 
 Les routes sont déclarées dans un bloc `config()`, Kinvey est initialisé dans un bloc `run()`, et aussitôt après un changement de route est déclenché (événement '$routeChangeStart') pour le chemin en cours.
 
