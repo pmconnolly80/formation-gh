@@ -1,6 +1,10 @@
 Attendre la fin d'une tâche asynchrone avant de poursuivre
 ==========================================================
 
+On suppose qu'on veut utiliser une fonction du SDK Kinvey (par exemple, requêter le data store avec `$kinvey.DataStore.find()`), mais que cette fonction n'est utilisable qu'une fois le SDK Kinvey initialisé.
+
+Pour rappel, `$kinvey.init()` renvoie une promesse qui réussit si l'initialisation réussit et qui échoue si l'initialisation échoue.
+
 A. Retarder l'exécution du code utilisant le SDK Kinvey
 -------------------------------------------------------
 
@@ -8,7 +12,7 @@ On pourrait wrapper le code qui utilise le SDK Kinvey dans un `$timeout`. Bien-s
 
 Supposons qu'on se trouve dans une directive qui affiche le nom de l'utilisateur courant :
 
-```
+```js
 ...
 return {
   controller: ['$scope', '$kinvey', '$timeout', function($scope, $kinvey, $timeout) {
@@ -26,7 +30,7 @@ B. Conditionner le code à une promesse
 
 Supposons qu'on se trouve dans un contrôleur qui doit attendre que Kinvey soit initialisé pour envoyer une requête au datastore :
 
-```
+```js
 ...
 
 kinveyService.init().then(function() {
