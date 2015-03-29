@@ -31,14 +31,15 @@ Pourquoi ne pas utiliser notre propre base de données ?
 Nous pourrions installer une base de données sur notre machine de développement comme nous l'avons fait pour Node.js. Le choix le plus répandu est probablement **MongoDB**.
 
 Cela dit, il nous manquerait un composant essentiel : une **interface REST** permettant à l'application AngularJS de communiquer avec la base de données via des requêtes HTTP. N'oublions pas que dans une application web traditionnelle (par ex, PHP/MySQL) :
-* Le code ET la base de données s'exécutent côté serveur, et
-* Les langages serveur proposent tous des commandes ou des librairies pour interagir facilement avec la base de données.
+* Le code ET la base de données s'exécutent côté serveur.
+* Les langages serveur proposent des commandes ou librairies pour interagir facilement avec la base de données.
 
-Avec AngularJS et les applications JavaScript en général, le code s'exécute côté client alors que la base de données s'exécute côté serveur. Les **APIs REST** font le trait d'union entre les deux. Certaines bases de données proposent également un driver JavaScript, mais c'est plutôt rare.
+Avec AngularJS et les applications JavaScript en général, le code s'exécute côté client alors que la base de données s'exécute côté serveur. Les **APIs REST** font le trait d'union entre les deux. Certaines bases de données proposent un driver JavaScript, mais c'est plutôt rare.
 
-En conclusion, cela aurait dépassé le cadre de la formation d'installer une base de données et d'implémenter l'API REST permettant de la requêter. Il aurait fallu :
-- Créer les différents modèles pour stocker les données.
-- Créer les routes exposant les opérations sur ces données et le code permettant de les manipuler.
+En conclusion, cela aurait dépassé le cadre de la formation d'installer une base de données et d'implémenter l'API REST permettant de la requêter. Voici les tâches qu'il aurait fallu effectuer :
+- Identifier/Créer les différents modèles de données dans la base.
+- Créer les routes exposant les opérations sur ces données (`GET /data`, `GET /data/:id`, `POST /data`...).
+- Créer le code correspondant à ces routes (c. à d. le code qui interagit effectivement avec la BDD).
 - Refaire la même chose pour l'authentification, en créant en plus un mécanisme de persistence du statut de l'utilisateur (session/cookie, JSON Web Tokens...).
 
 Voilà pourquoi nous utilisons Kinvey qui propose toutes ces fonctionnalités clé-en-main et en version gratuite.
