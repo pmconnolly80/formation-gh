@@ -46,14 +46,21 @@ En conclusion, cela aurait dépassé le cadre de la formation d'installer une ba
 On voit bien que le travail est assez important, même si certaines librairies peuvent prendre en charge une partie. Par exemple, http://passportjs.org/ est une librairie d'authentification pour Node.js.
 
 
+
+
 <a name="pourquoi-kinvey"></a>
 Pourquoi Kinvey ?
 -----------------
 
 Il existe de nombreux services de bases de données dans le cloud.
 
-J'ai choisi d'utiliser Kinvey, car c'est un véritable "Backend as a Service" qui propose l'ensemble des fonctionnalités nécessaires à l'élaboration d'une application AngularJS professionnelle : data store, authentification, hébergement de fichiers statiques, services de géolocalisation... De plus, tous ces services sont accessibles via un SDK AngularJS qui masque la complexité des appels bas niveau à l'API Kinvey. (Cela dit, et si vous le souhaitez, l'API REST est également accessible et peut être attaquée directement.)
+J'ai choisi d'utiliser **Kinvey**, car c'est un véritable **Backend as a Service** qui propose l'ensemble des fonctionnalités nécessaires à l'élaboration d'une application AngularJS professionnelle : data store, authentification, hébergement de fichiers statiques, services de géolocalisation... De plus, tous ces services sont accessibles via un SDK AngularJS qui masque la complexité des appels bas niveau à l'API Kinvey. (Cela dit, et si vous le souhaitez, l'API REST est également accessible et peut être attaquée directement.)
 
-Une autre solution populaire est MongoLab (https://mongolab.com/) qui propose des bases de données MongoDB dans le cloud, accessibles via une API REST. MongoLab est moins complet que Kinvey (juste une base de données, pas d'autres services comme l'authentification) et plus bas niveau (API REST vs SDK), mais c'est une architecture plus standard ; l'architecture "base de données MongoDB derrière une API REST" pourrait être reproduite en local ou chez de nombreux hébergeurs. Avec Kinvey, vos données sont stockées intégralement chez Kinvey...
+Quelques autres points en faveur de Kinvey :
+- Masque la complexité de l'authentification oAuth.
+- Sécurité : en plus de la APP KEY, l'utilisateur courant doit être identifié ; identifiants qui a priori ne sont pas stockés en clair sur le client. Si on utilise d'autres fournisseurs d'authentification (Google, Facebook...), les clés d'accès à ces fournisseurs ne sont jamais révélées au client non plus (elles sont stockées sur Kinvey).
+- Fonctionne même si le auth provider ne supporte pa CORS.
+
+Une autre solution populaire est **MongoLab** (https://mongolab.com/) qui propose des bases de données MongoDB dans le cloud, accessibles via une API REST. MongoLab est moins complet que Kinvey (juste une base de données, pas d'autres services comme l'authentification) et plus bas niveau (API REST vs SDK), mais c'est une architecture plus standard ; l'architecture "base de données MongoDB derrière une API REST" pourrait être reproduite en local ou chez de nombreux hébergeurs. Avec Kinvey, vos données sont stockées intégralement chez Kinvey...
 
 D'autres backends as a service seront évoqués au cours de la formation.

@@ -53,7 +53,7 @@ $stateProvider
   })
 ```
 
-A chaque changement de route, on pourrait ensuite tester la valeur de cette variable pour décider s'il faut rediriger l'utilisateur ou non en fonction de son statut :
+A chaque changement de route, on pourrait ensuite tester la valeur de cette variable `loginRequired` pour décider s'il faut rediriger l'utilisateur ou non en fonction de son statut :
 
 ```js
 AppCtrl.$inject = ['$rootScope', '$kinvey', '$state'];
@@ -63,13 +63,13 @@ function AppCtrl($rootScope, $kinvey, $state) {
   $rootScope.$on('$stateChangeStart', function(event, toState){
     // ... récupère le user courant
     var user = $kinvey.getActiveUser();
-    if (toState.data.loginRequired && (null == user)) {
+    if (toState.data.loginRequired && (null === user)) {
       // Interrompt le changement de route.
       event.preventDefault();
       // Et redirige ailleurs.
       $state.go('admin.login');
     }
-  })
+  });
 }
 ```
 
