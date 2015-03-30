@@ -73,28 +73,10 @@ Démarrer le serveur web, qui sert le contenu du répertoire `public` :
     # Soit avec :
     npm start
 
-Ouvrez votre navigateur et saisissez http://localhost:3000 dans la barre d'adresse.
+Ouvrez votre navigateur et visitez l'adrresse http://localhost:3000. Vous devriez voir le message de bienvenue d'Express.
 
-A ce stade, on pourrait exécuter une application AngularJS depuis un fichier `index.html` placé dans `public` et référençant la version CDN d'AngularJS.
+**JE VOUS CONSEILLE DE PLACER TOUS LES EXERCICES RÉALISÉS PENDANT LA FORMATION À L'INTÉRIEUR DU RÉPERTOIRE `public`, À RAISON D'UN RÉPERTOIRE PAR EXERCICE.**
 
-
-Voir p. 27 de AngularJS Web App Blueprints.
-
-Node.js seul ne permet pas de servir des pages web à un client (comme le fait un serveur Apache, par exemple). Il faut pour cela exécuter un serveur HTTP écrit en node.js qui va exposer et servir les fichiers de notre application à une URL donnée. Il existe plusieurs solutions, mais dans notre cas nous utiliserons le serveur tout simple http-server (https://github.com/indexzero/http-server).
-
-Pour l'installer globalement sur votre machine :
-
-    npm install http-server -g
-
-Si vous taper http-server XX, vous devez voir qqchose d'afficher.
-
-Pour vérifier que le serveur fonctionne correctement, créez un fichier HTML contenant le code suivant :
-
-Enregistrez ce fichier sous le nom index.html dans le répertoire où vous souhaitez faire les exercices pour la formation (à vous de choisir ce répertoire ; en ce qui me concerne, j'utilise Mac OS et mon répertoire ressemble à `/Users/vince/dev/angularjs`).
-
-Dans la console, exécuter la commande permettant de démarrer le serveur `http-server` :
-
-    commande
 
 Préparer la base de données
 ---------------------------
