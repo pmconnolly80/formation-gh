@@ -82,4 +82,4 @@ Vous devriez voir le message de bienvenue d'Express.
 Préparer la base de données
 ---------------------------
 
-Pour la base de données, voir [install_database.md](install_database.md).
+Pour la base de données, voir [install_kinvey.md](install_kinvey.md).
