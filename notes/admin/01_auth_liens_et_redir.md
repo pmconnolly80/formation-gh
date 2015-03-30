@@ -1,7 +1,7 @@
 Auth - Liens et Redirections
+============================
 
-
-Une fois SDK Kinvey correctement initialisé (via un `resove`), on a la garantie d'avoir l'utilisateur courant dans chaque contrôleur/vue initialisés par le routeur. Bien entendu, l'utilisateur courant sera `null` pour les utilisateurs non authentifiés.
+Une fois le SDK Kinvey correctement initialisé (via un `resove`), on a la garantie d'avoir l'utilisateur courant dans chaque contrôleur/vue initialisés par le routeur. Bien entendu, l'utilisateur courant sera `null` quand l'utilisateur n'est pas encore authentifié.
 
 Implémentez les **redirections** suivantes :
 - Après login, redirigez l'utilisateur vers la page d'accueil.
