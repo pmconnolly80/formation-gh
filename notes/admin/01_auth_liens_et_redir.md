@@ -4,6 +4,7 @@ Auth - Liens et Redirections
 Une fois le SDK Kinvey correctement initialisé (via un `resove`), on a la garantie d'avoir l'utilisateur courant dans chaque contrôleur/vue initialisés par le routeur. Bien entendu, l'utilisateur courant sera `null` quand l'utilisateur n'est pas encore authentifié.
 
 Implémentez les **redirections** suivantes :
+
 1. Après login, redirigez l'utilisateur vers la page d'accueil.
 2. Après signup, redirigez l'utilisateur vers la page d'accueil. (Dans le SDK Kinvey, la commande `$kinvey.User.signup()` authentifie l'utilisateur dans la foulée.)
 3. Si l'utilisateur est déja authentifié et qu'il se rend sur la page de login ou de signup, redirigez-le vers la page d'accueil.
