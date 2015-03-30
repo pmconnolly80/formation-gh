@@ -1,7 +1,7 @@
 Auth - Liens et Redirections
 ============================
 
-Une fois le SDK Kinvey correctement initialisé (via un `resove`), on a la garantie d'avoir l'utilisateur courant dans chaque contrôleur/vue initialisés par le routeur. Bien entendu, l'utilisateur courant sera `null` quand l'utilisateur n'est pas encore authentifié.
+Une fois le SDK Kinvey correctement initialisé (via un `resolve` dans un état abstrait), on a la garantie d'avoir l'utilisateur courant dans chaque contrôleur/vue initialisés par le routeur. Bien entendu, l'utilisateur courant sera `null` quand l'utilisateur n'est pas encore authentifié.
 
 Implémentez les **redirections** suivantes :
 
@@ -12,6 +12,7 @@ Implémentez les **redirections** suivantes :
 
 Implémentez les **liens** suivants :
 - Dans le formulaire de login, ajoutez un lien permettant d'accéder au formulaire de signup.
+- Dans le formulaire de signup, ajoutez un lien permettant d'accéder au formulaire de login.
 
 
 Où faut-il faire la redirection ?

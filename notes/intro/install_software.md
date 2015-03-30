@@ -3,6 +3,7 @@ Formation AngularJS - Logiciels à installer
 
 Tâches préparatoires à réaliser avant votre [formation AngularJS](http://ng-workshop.com/fr/formations/angularjs).
 
+
 Logiciels à installer
 ---------------------
 
@@ -15,6 +16,7 @@ Avant tout, assurez-vous que les logiciels suivants ou équivalents sont install
 **Remarque importante.** Une application AngularJS peut tourner sur n'importe quel serveur web. Si vous avez déjà IIS, Apache, Nginx ou n'importe quel autre serveur sur votre machine de développement, vous pouvez l'utiliser pour héberger votre application AngularJS (il suffit de placer les fichiers de l'appli AngularJS quelque part sous le “web root” de votre serveur).
 
 Dans la suite de ces instructions, je vous montre comment installer Node.js + ExpressJS comme solution serveur --- EST CE BIEN CES TECHNOS LA ?? ---. C'est un stack assez répandu pour faire tourner les SPA, mais il n'est pas obligatoire.
+
 
 Installer Node.js
 -----------------
@@ -41,8 +43,38 @@ Vérifiez que la version de npm (le package manager de Node.js) s'affiche lorsqu
 
  A COMPLETER : Installer un package avec npm
 
+
 Installer un serveur web avec ExpressJS
 ---------------------------------------
+
+Installons le module ExpressJS pour Node.js.
+
+Commençons par installer le générateur d'application ExpressJS (http://expressjs.com/starter/generator.html) avec la commande suivante :
+
+    npm install -g express-generator
+    # Linux/Mac: sudo npm install –g express-generator
+
+Le flag `-g` dénote une installation globale. Il faut faire une installation globale pour pouvoir accéder à l'exécutable `express` depuis la ligne de commande.
+
+
+### Créer une application ExpressJS
+
+    express my-server
+
+On obtient un squelette d'application dans le répertorie `my-server`. Des dépendances ont également été déclarées dans le fichier `package.json`.
+
+Pour installer ExpressJS proprement dit et les autres dépendances :
+
+    cd my-server && npm install
+
+Démarrer le serveur web, qui sert le contenu du répertoire `public` :
+
+    npm start
+
+Ouvrez votre navigateur et saisissez http://localhost:3000 dans la barre d'adresse.
+
+A ce stade, on pourrait exécuter une application AngularJS depuis un fichier `index.html` placé dans `public` et référençant la version CDN d'AngularJS.
+
 
 Voir p. 27 de AngularJS Web App Blueprints.
 

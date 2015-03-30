@@ -15,7 +15,7 @@ Créer un service d'authentification
 
 Dans `auth/services.js` :
 
-- Créez un service `AuthService` qui implémente 3 méthodes `login()`, `logout()` et `signup()`. Ces méthodes appelleront les méthodes correspondantes de l'API Kinvey.
+- Créez un service `AuthService` qui implémente 4 méthodes `login()`, `logout()`, `signup()` et `getCurrentUser()`. Ces méthodes appelleront les méthodes correspondantes de l'API Kinvey.
 
 Dans `auth/controllers.js` :
 
