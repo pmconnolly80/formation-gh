@@ -32,3 +32,5 @@ function LoginCtrl(AuthService, $state, currentUser) {
   }
 }
 ```
+
+Mais c'est dommage d'initialiser une vue et un contrôleur qu'on ne va même pas utiliser... N'y a-t-il pas un endroit plus en amont où on pourrait tester le statut de l'utilisateur pour faire la redirection ?
