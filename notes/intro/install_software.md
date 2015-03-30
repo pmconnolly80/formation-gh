@@ -41,8 +41,6 @@ Vérifiez que la version de npm (le package manager de Node.js) s'affiche lorsqu
 
     npm --version
 
- A COMPLETER : Installer un package avec npm
-
 
 Installer un serveur web avec ExpressJS
 ---------------------------------------
@@ -69,6 +67,10 @@ Pour installer ExpressJS proprement dit et les autres dépendances :
 
 Démarrer le serveur web, qui sert le contenu du répertoire `public` :
 
+    # Soit avec la commande conseillée lors de l'install :
+    DEBUG=my-server:* ./bin/www
+
+    # Soit avec :
     npm start
 
 Ouvrez votre navigateur et saisissez http://localhost:3000 dans la barre d'adresse.
