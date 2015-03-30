@@ -73,7 +73,7 @@ Démarrer le serveur web, qui sert le contenu du répertoire `public` :
     # Soit avec :
     npm start
 
-Ouvrez votre navigateur et visitez l'adrresse (http://localhost:3000)[http://localhost:3000].
+Ouvrez votre navigateur et visitez l'adrresse [http://localhost:3000](http://localhost:3000).
 Vous devriez voir le message de bienvenue d'Express.
 
 **JE VOUS CONSEILLE DE PLACER TOUS LES EXERCICES RÉALISÉS PENDANT LA FORMATION À L'INTÉRIEUR DU RÉPERTOIRE `public`, À RAISON D'UN RÉPERTOIRE PAR EXERCICE.**
