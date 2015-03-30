@@ -55,17 +55,23 @@ C. Initialiser les routes après l'initialisation de Kinvey
 
 Impossible.
 
-Les routes sont déclarées dans un bloc `config()`, Kinvey est initialisé dans un bloc `run()`, et aussitôt après un changement de route est déclenché (événement '$routeChangeStart') pour le chemin en cours.
+Les routes sont déclarées dans un bloc `config()`, Kinvey est initialisé dans un bloc `run()`, et aussitôt après un changement de route est déclenché (événement `$routeChangeStart`) pour le chemin en cours.
 
-Si le chemin matche une route, la vue et l'éventuel contrôleur de ce chemin sont activés. Le contrôleur peut très bien utiliser le SDK Kinvey alors qu'il n'a pas fini de s'initialiser.
+Si le chemin matche une route, la vue et l'éventuel contrôleur de ce chemin sont activés. Le contrôleur peut très bien utiliser le SDK Kinvey alors que Kinvey n'a pas fini de s'initialiser.
 
 Si le chemin ne matche aucune route, c'est la route "otherwise" qui sera activée. Elle aussi peut potentiellement déclencher un appel à Kinvey.
 
-On ne contrôle pas le flot d'exécution config() --> run() --> $routeChangeStart.
+En résumé, on ne contrôle pas le flot d'exécution `config()` --> `run()` --> `$routeChangeStart`.
 
 D. Utiliser la propriété `resolve` des routes
 ---------------------------------------------
 
-Bonne idée. Ca fonctionne bien.
+Bonne idée.
 
-Mais quel dommage de devoir manuellement ajouter le même `resolve` à chaque route... Une solution consiste à redéfinir `$routeProvider.when()` de sorte que le `resolve` qui attend l'initialisation de Kinvey soit ajouté automatiquement et systématiquement. Voir un exemple de cette technique : http://spin.atomicobject.com/2014/10/04/javascript-angularjs-resolve-routes/
+Cela consiste à utiliser le paramètre `resolve` des routes pour les rendre dépendantes à la promesse renvoyée par `$kinvey.init()`. Ainsi, le contrôleur de chaque route n'est exécuté qu'une fois qu'on est certain que Kinvey est initialisé.
+
+Mais quel dommage de devoir manuellement ajouter le même `resolve` à toutes les routes...
+
+Une solution consiste à redéfinir `$routeProvider.when()` de sorte que le `resolve` qui attend l'initialisation de Kinvey soit ajouté automatiquement et systématiquement. Voir un exemple de cette technique : http://spin.atomicobject.com/2014/10/04/javascript-angularjs-resolve-routes/
+
+Une autre solution, si vous utilisez `ui-router`, consiste à créer un état abstrait qui contient le resolve, et à faire hériter tous les états qui utilisent le SDK Kinvey de cet état.
