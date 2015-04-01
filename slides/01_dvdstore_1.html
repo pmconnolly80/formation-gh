@@ -356,7 +356,7 @@ DOC: https://code.angularjs.org/1.3.15/docs/api/ng/service/$http
 
 Dans le contrôleur `dvdStoreCtrl` :
 
-- Utilisez le SDK Kinvey pour requêter les données depuis le data store distant. DÉTAILS : <note path="dvdstore/04b_kinvey.md"></note>  -- TÂCHE TEMPORAIREMENT ANNULÉE.
+- Utilisez le SDK Kinvey pour requêter les données depuis le data store distant. DÉTAILS : <note path="dvdstore/04_kinvey_helper.md"></note>
 - Si la requête se déroule avec succès, exposez les données sur le scope.
 - Si la requête échoue, affichez un message d'erreur à l'utilisateur. Indice : la directive `ng-show` permet de montrer un élément HTML en fonction de la valeur d'une expression. (Vous pouvez simuler une erreur en introduisant une typo dans l'URL).
 
@@ -372,7 +372,7 @@ Dans le contrôleur `dvdStoreCtrl` :
 
 DOC: https://docs.angularjs.org/api/ng/service/$q
 
-Code qui renvoie une promesse (a priori, du code asynchrone) :
+Code qui renvoie une promesse (par exemple, du code asynchrone) :
 
 ```js
 function asyncOperation() {
