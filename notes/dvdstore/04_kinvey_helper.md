@@ -34,7 +34,7 @@ Par exemple, pour faire une requête au data store dans un contrôleur :
 dvdStoreCtrl.$inject = ['$kinvey', 'KinveyHelper'];
 function dvdStoreCtrl($kinvey, KinveyHelper) {
   var vm = this;
-  KinveyHelper.isReady().then(function(currentUser) {
+  KinveyHelper.isReady().then(function() {
     $kinvey.DataStore.find('products').then(function(data) {
       vm.products = data;
     });
@@ -67,6 +67,7 @@ Code source de `kinvey-helper.js`
             var loggedInPromise = (null === user) ? $kinvey.User.login({ username: 'toto', password: 'toto' }) : $q.when(user);
             loggedInPromise.then(function(user) {
               // User is logged in.
+              console.log('Kinvey is initialized with user', user);
               deferred.resolve(user);
             }, function(err) {
               // User could not log in.
