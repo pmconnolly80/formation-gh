@@ -100,7 +100,7 @@ La commande `grunt` exécute par défaut toutes les tâches listées dans `grunt
     grunt concat
 
 
-Si on veut exécuter des tâches séparement, il suffit de les déclarer sous un autre "alias" de tâches groupées :
+Si on veut exécuter ensemble un groupe de tâches spécifiques, il suffit de les déclarer sous un autre "alias" de tâches groupées :
 
     grunt.registerTask('concat-min', ['concat','uglify']);
 
