@@ -80,51 +80,30 @@ Nous allons lui confier les tâches suivantes :
 
 Commençons par la tâche JSHint.
 
-Copiez le code suivant dans `Gruntfile.js` :
+Prenez le code de [Gruntfile.js](Gruntfile.js) pour le copier dans votre `Gruntfile.js`.
 
-```
-module.exports = function(grunt) {
-
-  // Configure les tâches.
-  grunt.initConfig({
-    jshint: {
-      all: ['app.js']
-    }
-  });
-
-  // Charge les packages nécessaires à l'exécution des tâches.
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-
-  // Expose les tâches.
-  grunt.registerTask('default', ['jshint']);  // tâche par défaut
-};
-```
-
-Puis, dans le terminal :
+Puis, dans le terminal, exécutez la commande :
 
     grunt
 
 Ajout des tâches :
-- `concat` - NB. Ordre des fichiers .js dans `src` == Ordre du merge
-- `uglify`
-Chargement des plugins nécessaires, e.g. grunt-contrib-concat
-
-## Exécuter des commandes Shell via Grunt
-
-Another really helpful plugin in Grunt is grunt-shell. This allows us to effectively run clean-up activities such as deleting .tmp files and moving files from one folder to another.
+- Modifiez la tâche `concat` de façon à concaténer tous les fichiers situés dans le répertoire `controllers`, puis à les minifier dans `build/controllers.min.js`.
+- Si vous n'êtes pas sous Unix, vous adapterez le code de la commande `shell`.
 
 
-As you can see from the code we added, we are first deleting the merged.js file, then creating a new folder called deploy and moving our merged.min.js file into it. Windows users would need to use the appropriate DOS commands for deleting and copying the files.
+Exécuter les tâches
+-------------------
 
-La commande `grunt` par défaut exécute toutes les tâches listées dans `grunt.registerTask()`, mais ces tâches peuvent être exécutées individuellement :
+La commande `grunt` exécute par défaut toutes les tâches listées dans `grunt.registerTask()`, mais ces tâches peuvent être exécutées individuellement :
 
     grunt jshint
     grunt concat
 
 
-At times if you'd like to run just two of the three tasks, then you can register them separately as another bundled task in the Grunt file.
+Si on veut exécuter des tâches séparement, il suffit de les déclarer sous un autre "alias" de tâches groupées :
 
     grunt.registerTask('concat-min', ['concat','uglify']);
 
 Puis :
+
     grunt concat-min
