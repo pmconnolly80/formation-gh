@@ -56,14 +56,14 @@ Vous pouvez partir d'un modèle ou créer ce fichier interactivement avec :
 
     bower init
 
-2) Ensuite, il faut penser à sauvegarder les packages installés dans `bower.json`
+2) Ensuite, il faut penser à sauvegarder les packages installés dans `bower.json`.
 
 La commande `bower install <package> --save` va installer `<package>` à la liste des `dependencies` dans `bower.json`.
 
-  # Installe un package et ajoute-le aux dependencies de bower.json
-  $ bower install <package> --save
+    # Installe un package et ajoute-le aux dependencies de bower.json
+    $ bower install <package> --save
 
 La commande `bower install <package> --save-dev` va installer `<package>` à la liste des `devDependencies` dans `bower.json`.
 
-  # Installe un package et ajoute-le aux devDependencies de bower.json
-  $ bower install <package> --save-dev
+    # Installe un package et ajoute-le aux devDependencies de bower.json
+    $ bower install <package> --save-dev
