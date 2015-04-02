@@ -1,0 +1,34 @@
+<h1>{{vm.heading}}</h1>
+<hr/>
+
+<div class="row">
+  <div class="col-md-9 col-xs-12">
+    <form role="form" id="add-page" ng-submit="vm.saveProduct(vm.product)">
+      <div class="form-group">
+        <label>Page ID</label>
+        <input class="form-control" type="text" readonly ng-model="vm.product._id" />
+      </div>
+      <div class="form-group">
+        <label>Nom</label>
+        <input class="form-control" type="text" ng-model="vm.product.name" />
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea rows="10" class="form-control" ng-model="vm.product.description"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Prix</label>
+        <div class="input-group">
+          <input class="form-control" type="text" ng-model="vm.product.url" size="6" />
+          <div class="input-group-addon">€</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Couverture</label>
+        <input class="form-control" type="text" ng-model="vm.product.cover" />
+      </div>
+      <input type="submit" class="btn btn-primary" value="Enregistrer">
+      <a href="#">Annuler</a>
+    </form>
+  </div>
+</div>
