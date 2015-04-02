@@ -21,8 +21,8 @@ Pour configurer les tâches Grunt et la manière de les exécuter, créez un fic
 Puisque notre projet utilise Grunt, c'est une bonne idée de **capturer cette dépendance** dans un fichier `package.json`. Ce fichier est utilisé par Node.js pour capturer et gérer les dépendances d'un projet.
 
 Le fichier `package.json` peut être créé de deux manières :
-- Copier un `package.json` existant, et l'adapter.
-- Démarrer de zéro avec la commande `npm init`.
+- En copiant un `package.json` existant, et l'adapter.
+- En partant de zéro avec la commande `npm init`.
 
 Exemple de contenu de `package.json` :
 
@@ -54,15 +54,17 @@ Une fois Grunt installé, vérifiez que tout est en place en checkant sa version
     grunt –-version
 
 
+Créer des tâches Grunt
+----------------------
 
+Maintenant que tout est en place, le moment est venu de remplir notre fichier `Gruntfile.js` pour indiquer à Grunt les tâches qu'il devra effectuer.
 
-        <section class="size-s leftp" data-markdown>
-          <script type="text/template">
-## Créer des tâches Grunt
+Nous allons lui confier les tâches suivantes :
 
-The next step is to create a Grunt file that will list out the tasks that we need Grunt to perform.
-
-For now, we will ask it to do four simple tasks, first check if our JS code is clean using JSHint, then we will merge three JS files into one and then minify the JS file, and finally we will run some shell commands to clean up.
+- Vérifier que notre code JS est propre grâce à JSHint.
+- Merger les fichiers JS du répertoire `controllers` en une seule.
+- Minifier le fichier JS résultant file.
+- Exécuter quelques commandes shell de nettoyage.
 
 Dans le même répertoire que `package.json`, créer un fichier `gruntfile.js`.
 
