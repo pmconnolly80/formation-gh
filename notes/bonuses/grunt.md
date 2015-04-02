@@ -36,10 +36,7 @@ Exemple de contenu de `package.json` :
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Vincent Caillierez",
-  "license": "ISC",
-  "devDependencies": {
-    "grunt": "^0.4.5"
-  }
+  "license": "ISC"
 }
 ```
 
@@ -49,24 +46,34 @@ A présent, installez Grunt :
 
 Le flag `--save-dev` permet d'enregistrer la dépendance à Grunt dans `package.json`. Ainsi, il sera facile de **réinstaller le projet avec toutes ses dépendances** dans un autre environnement, par exemple pour le *déploiement*.
 
-Une fois Grunt installé, vérifiez que tout est en place en checkant sa version :
+Vérifiez que tout est OK :
 
-    grunt –-version
+- Voyez vous la version de Grunt en tapant `grunt –-version` ?
+- Y a-t-il à présent un répertoire appelé `node_modules` dans votre projet ?
+- Dans `package.json`, la propriété `devDependencies` mentionne-t-elle Grunt ?
 
 
 Créer des tâches Grunt
 ----------------------
 
-Maintenant que tout est en place, le moment est venu de remplir notre fichier `Gruntfile.js` pour indiquer à Grunt les tâches qu'il devra effectuer.
+Maintenant que tout est en place, le moment est venu de remplir notre fichier `Gruntfile.js` pour indiquer à Grunt les tâches à effectuer.
 
 Nous allons lui confier les tâches suivantes :
 
 - Vérifier que notre code JS est propre grâce à JSHint.
-- Merger les fichiers JS du répertoire `controllers` en une seule.
+- Merger les fichiers JS du répertoire `controllers` en un seul fichier.
 - Minifier le fichier JS résultant file.
 - Exécuter quelques commandes shell de nettoyage.
 
-Dans le même répertoire que `package.json`, créer un fichier `gruntfile.js`.
+Pour exécuter les tâches ci-dessus, il nous faut installer des packages Node.js supplémentaires :
+
+- `grunt-contrib-jshint` : analyse du code
+- `grunt-contrib-concat` : merge plusieurs fichiers en un seul
+- `grunt-contrib-uglify` : minifie le JavaScript
+- `grunt-shell` : exécute des commandes shell depuis une tâche Grunt
+
+Installez ces packages avec `npm install` en prenant soin de les sauvegarder dans `package.json`.
+
 
 To start, we will add only one task which is jshint and specify scripts.js in the list of files that need to be linted.
 
