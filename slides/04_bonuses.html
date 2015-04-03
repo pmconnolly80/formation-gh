@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="fr">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Formation AngularJS - Bonuses</title>
+
+    <meta name="description" content="Formation AngularJS">
+    <meta name="author" content="Vincent Caillierez">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="formation.css">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-controller="appCtrl">
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+
+        <section class="size-" data-markdown>
+          <script type="text/template">
+# "Bonuses"
+## Le 4ème jour de formation
+          </script>
+        </section>
+
+
+        <section class="size-" data-markdown>
+          <script type="text/template">
+# Programme
+
+- Outils productivité (grunt, bower...)
+- Tests unitaires et E2E
+- Internationalisation
+- Éléments d'interface (modales & directives custom)
+- Plugins jQuery et AngularJS
+          </script>
+        </section>
+
+
+        <section class="size-" data-markdown>
+          <script type="text/template">
+# Outils productivité
+## `grunt`, `bower`, etc.
+          </script>
+        </section>
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+## Ne pas confondre les outils ;-)
+
+**npm** — Package manager pour les modules Node.js. Installe des packages comme ExpressJS, Karma...
+
+**bower** — Package manager pour les librairies front-end (AngularJS, UI-Router...). Un peu comme Composer pour PHP.
+
+**grunt** — Task runner JavaScript. Automatise des tâches telles que la concaténation et la minification des fichiers JS et CSS.
+
+**yeoman** — yeoman + grunt + bower. Repose sur le concept de *generators* qui génèrent un projet préconfiguré et promeuvent un workflow, une organisation de fichiers, etc.
+          </script>
+        </section>
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+## Grunt
+
+Grunt est un **task runner JavaScript**. Il permet d'**automatiser les tâches** telles que l'exécution des tests unitaires, la concaténation et la minification des fichiers JS et CSS. Il permet aussi d'automatiser l'exécution de commandes shell, très utile pour nettoyer des répertoires, faire tourner du code de déploiement...
+
+**Mode d'emploi (vue d'ensemble) :**
+
+- Installer Grunt
+- Créer un fichier `Gruntfile.js` dans lequel on indique les tâches à exécuter.
+- Exécuter la commande `grunt`.
+          </script>
+        </section>
+
+
+        <section class="size-s2 leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Installer et utiliser Grunt
+
+Placez-vous dans le répertoire de l'application `dvdstore` créée précédemment, puis :
+
+- Installez Grunt.
+- Créez un fichier `package.json` (avec `npm init`) où vous mettrez la dépendance à Grunt.
+- Créez un fichier `Gruntfile.js` où vous mettrez les tâches à réaliser.
+- Exécuter les tâches avec la commande `grunt`.
+
+Instructions détaillées : <note path="bonuses/grunt.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 leftp" data-markdown>
+          <script type="text/template">
+## Bower
+
+Package manager pour les librairies front-end (AngularJS, UI-Router...).
+
+Installer Bower :
+
+```
+npm install -g bower
+```
+
+Créer un fichier `bower.json` :
+
+```
+npm init
+```
+
+Installer un package en le sauvegardant dans `bower.json` :
+
+```
+bower install <package> --save
+```
+
+Exemple :
+```
+bower install angular angular-ui-router bootstrap --save
+```
+          </script>
+        </section>
+
+
+        <section class="size exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Installer et utiliser Bower
+
+Instructions détaillées : <note path="bonuses/bower.md"></note>
+          </script>
+        </section>
+
+
+        <section class="size-" data-markdown>
+          <script type="text/template">
+# Tests unitaires et E2E
+          </script>
+        </section>
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+## Types de tests
+
+- **Tests unitaires** : pour tester des composants isolés de code (par ex, une fonction précise). Exemple AngularJS : tester le comportement d'un filtre custom.
+- **Tests E2E (end-to-end)** : pour tester l'application du point de vue de l'utilisateur final. Utile pour les grandes fonctionnalités. Exemple AngularJS : tester qu'un user parvient à se logger, puis est redirigé sur sa page d'accueil.
+
+Karma supporte par défaut les tests unitaires et les tests E2E.
+
+**Note :** AngularJS fournit des "mocks" qui peuvent être utilisés pour les tests unitaires (`angular-mocks.js`). À télécharger séparément depuis angularjs.org.
+          </script>
+        </section>
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Mettre en place des tests unitaires
+
+Vous partirez de `exos_starters/testing` :
+
+- Vérifiez que l'application AngularJS contenue dans `exos_starters/testing` s'exécute correctement dans votre navigateur.
+- Suivez les instructions de préparation des tests décrites sur <note path="testing/README.md"></note>.
+- Examinez le contenu du fichier `tests/firstTest.js` et expliquez ce qu'il fait, notamment les commandes `beforeEach` et `it`.
+- Complétez le test "decrements value".
+- Examinez le contenu du fichier `tests/firstTest.js`. Que se passe-t-il dans le `beforeEach` ?
+- Complétez le test "Increments counter".
+          </script>
+        </section>
+
+
+        <section class="size-s2 leftp" data-markdown>
+          <script type="text/template">
+## Tests - Aller plus loin
+
+**Doc officielle :**
+
+- Tests unitaires : https://docs.angularjs.org/guide/unit-testing
+- Tests E2E (avec Protractor) : https://docs.angularjs.org/guide/e2e-testing
+
+**Bons articles en français :**
+
+- http://www.occitech.fr/blog/2013/10/les-tests-angularjs-le-guide-de-a-a-z-partie-1-les-tests-unitaires/
+- http://www.synbioz.com/blog/preparation_aux_tests_unitaires_d_une_application_angularjs
+
+**Bonnes pratiques testing :** [angular-test-patterns](https://github.com/daniellmb/angular-test-patterns) ("A High-Quality Guide for Testing Angular Applications")
+          </script>
+        </section>
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+# Internationalisation
+          </script>
+        </section>
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+## Définition des termes
+
+**Internationalisation (i18n)** - Rendre votre application capable de supporter plusieurs langues et locales.
+
+**Localisation (L10n)** - Rendre votre application capable de supporter un langue / une locale spécifique.
+
+**Globalisation** - Internationalisation + Localisation.
+
+**Language** - Par exemple, l'espagnol en général. Code ISO "es".
+
+**Locale** - Le Mexique. L'espagnol d'Espagne est différent de l'espagnol du Mexique, e.g. "es-ES" vs. "es-MX" (locale id`).
+          </script>
+        </section>
+
+
+        <section class="size-s leftp ng-non-bindable" data-markdown>
+          <script type="text/template">
+## Localiser dates, chiffres et monnaies
+
+Support prévu dans AngularJS, mais pas chargé par défaut.
+
+**Effets :**
+
+De nombreux filtres natifs s'adaptent à la locale en cours, comme `currency` ou `date` : `{{periodStart | date:'mediumDate'}}`
+
+**Limites :**
+
+- On ne peut inclure qu'un seule fichier "locale" à la fois (!!)
+- Le changement de locale à la volée est impossible.
+- Contournement : utiliser un script loader pour charger dynamiquement le bon fichier en fonction de la locale en cours.
+
+**Installation :** charger **après AngularJS** le fichier "locale" adéquat (à récupérer dans le répertoire `i18n` du zip complet venant de angularjs.org)
+
+```
+[script src="../assets/js/angular.js"][/script]
+[script src="../assets/js/angular-locale_fr-fr.js"][/script]
+```
+          </script>
+        </section>
+
+        <section class="size-xs leftp" data-markdown>
+          <script type="text/template">
+## Traduire les textes d'interface
+
+Deux solutions principales :
+
+**angular-translate :**
+
+- Site : http://angular-translate.github.io/
+- Traductions stockées sous forme d'**objets JavaScript** ou de **fichiers JSON**.
+- Fonctionnalités : lazy loading des traductions, gestion des pluriels, filtres et directives...
+
+**angular-gettext :**
+
+- Site : https://angular-gettext.rocketeer.be/
+- Approche complètement différente : repose sur le système Gettext issu d'Unix (fichiers `.pot` et `.po`, nombreux outils...) ; au lieu d'insérer explicitement les chaînes à traduire dans les vues, il suffit de marquer les chaînes traduisibles et `angular-gettext` va les extraire/traduire automatiquement
+- Exemple : `<h1 translate>Good morning!</h1>`  // La chaîne "Good morning!" sera traduisible
+          </script>
+        </section>
+
+
+        <section class="size- leftp ng-non-bindable" data-markdown>
+          <script type="text/template">
+## `angular-translate` - Fonctionnement
+
+1) Déclarer des **tables de traduction** grâce à `$translateProvider` (dans `Module.config()`) :
+
+```js
+$translateProvider.translations('en', { GREETING: 'Good morning'});
+$translateProvider.translations('fr', { GREETING: 'Good Bonjour'});
+
+// Définir une langue par défaut :
+$translateProvider.preferredLanguage('fr');
+```
+
+2) **Afficher des textes traduits** dans les vues :
+
+```
+<h1>{{ 'GREETING' | translate }}</h1>
+```
+
+3) **Changer la langue à la volée** avec `$translate` :
+
+```js
+// En réponse à une action utilisateur
+$translate.use(lang);
+```
+          </script>
+        </section>
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Utiliser `angular-translate`
+
+Reprenez le DVD Store créé précédemment et installez `angular-translate` :
+
+- Dans `index.html`, chargez le script `angular-translate.js`.
+- Dans `app.js`, déclarez `pascalprecht.translate` comme dépendance du module principal.
+
+Ensuite :
+
+- Créez une traduction pour le texte "Votre panier".
+- Rendez-le texte "Votre panier" traduisible dans la vue `cart/cartSummary.html`.
+- Ajoutez des boutons EN/FR pour sélectionner la langue en cours.
+          </script>
+        </section>
+
+
+        <section class="size- leftp ng-non-bindable" data-markdown>
+          <script type="text/template">
+## `angular-translate` - Aller plus loin
+
+Il n'est pas très pratique de stocker ses traductions dans des objets JavaScript...
+
+fournit des extensions qui rendent son utilisation plus robuste.
+
+**urlLoader :** Charge les fichiers de traduction en asynchrone (depuis une URL)
+
+```js
+$translateProvider.useUrlLoader('foo/bar.json');
+$translateProvider.preferredLanguage('en');   // ==> Va requêter foo/bar.json?lang=en
+```
+
+**staticFilesLoader** : Charger des fichiers statiques de traduction
+
+Etc.
+          </script>
+        </section>
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+# Éléments d'interface
+## Modales & Directives custom
+          </script>
+        </section>
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+## Angular UI - Intro
+
+Site : https://angular-ui.github.io/
+
+- **Bibliothèques de packages** compatibles AngularJS :
+  - Fonctions utilitaires (UI-Utils)
+  - Éléments d'interface (UI-Bootstrap)
+  - Remplacements de fonctionnaltiés natives (UI-Router)
+  - ...
+- Syntaxe à la sauce AngularJS.
+- La plupart n'ont PAS de dépendances externes (comme jQuery).
+          </script>
+        </section>
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## UI-Boostrap (Modale)
+
+**Principe général :** directives custom qui implémentent des widgets ou des éléments d'interface (e.g. `alert`, `carousel`)
+
+**Mode d'emploi rapide UI-Bootstrap :**
+
+- Télécharger UI Bootstrap (http://angular-ui.github.io/bootstrap/) et référencer le script téléchargé **après** AngularJS.
+- Ajouter `ui.bootstrap` comme dépendance de l'application principale.
+- Utiliser les directives custom comme `alert`, `carousel`,... Le code est super lisible !
+
+**Mode d'emploi rapide `$modal` :**
+
+- NB. `$modal` est un service, pas une directive.
+- Ouvrir la modale (dans un contrôleur) : `$modal.open(...)`
+- Fermer la modale "OK" (dans une vue) : `$close(RESULTAT_PROMESSE)` -- résout la promesse avec succès
+- Fermer la modale "CANCEL" (dans une vue) : `$dismiss()` -- rejette la promesse
+          </script>
+        </section>
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Utiliser `$modal` pour confirmer avant de supprimer
+
+Première piste : Ajouter `$modal.open()` dans le code de la méthode de suppression. On récupère une promesse ! C'est comme un appel asynchrone. MAIS... il faut préciser bcp de params dans `open()`.
+
+Quel code voudrions-nous dans l'idéal ?
+
+```
+confirmDeletion(product).then(deleteProduct);
+```
+
+Tâches :
+- Créer un service `confirmDeletion` qui configure et ouvre la modale pour nous.
+- NB. Ce service retourne une fonction, pas un objet. La fonction retournée retourne `$modal.open().result`.
+
+          </script>
+        </section>
+
+
+        <section class="size-" data-markdown>
+          <script type="text/template">
+## Directives Custom
+
+On peut ranger les directives custom en **4 catégories** :
+
+- Inclusion élaborée (facile)
+- Déclarative (relativement facile)
+- Impérative (plus compliqué)
+- Directive liée aux formulaires
+          </script>
+        </section>
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+## Inclusion élaborée
+
+**Exemple :** Barre de nav.
+
+- Plutôt que d'inclure le HTML correspondant avec `ngInclude`, on utilise une directive custom.
+- Pas de contrôleur, pas de bindings... La directive ne fait rien de particulier.
+- Surtout une façon de rendre son HTML plus élégant (par ex, `<navbar></navbar>` au lieu de §$$!!#!).
+          </script>
+        </section>
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Directive déclarative
+
+Dans le BO, on veut laisser la possibilité à l'admin de noter les produits avec un système d'étoiles.
+
+**RÉSULTAT ATTENDU :**
+
+```html
+<rating value="product.rating" min="1" max="5"></rating>
+```
+
+**BONNE PRATIQUE :** Écrire le markup de la directive souhaitée (si elle existait déjà), puis travailler à rebours pour rendre ce markup fonctionnel.
+
+**IMPORTANT :**
+
+- Angular-UI possède déjà une directive `rating`. Nous allons quand même créer la nôtre à titre d'exercice.
+- Il faudra l'appeler autrement pour éviter les conflits. Une convention est d'utiliser un préfixe commun pour toutes les directives custom d'un projet, par exemple : `myRating`, `myWidget` (deviendra dans le HTML `my-rating`, `my-widget`).
+          </script>
+        </section>
+
+
+        <section class="size-xs leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Créer `myRating` avec la syntaxe impérative
+
+**OBJECTIF :** pouvoir utiliser la directive `rating` décrite précédemment.
+
+**PRÉPARATION :** Dans la console Kinvey, ajoutez une colonne `rating` à la collection `products`, et renseignez une valeur entre 1 et 5 pour chaque produit.
+
+Reprenez l'application `dvdStore` créée précédemment, et ajoutez-y un fichier `directives/myRating.js` avec le code suivant :
+
+- Créez une directive appelée `myRating`. Ne pas confondre `myRating` vs `my-rating`.
+- Propriété `scope` : Déclarez un two-way binding sur l'attribut `value`.
+- Propriété `link` (voir <note path="bonuses/directives_tips.md"></note>) :
+  - Appendez une étoile autant de fois que le nombre contenu dans `value`. Si la valeur change, le nb d'étoiles doit changer automatiquement.
+  - Un clic sur une étoile doit faire apparaître une étoile supplémentaire.
+- Insérez votre directive dans la liste des produits et vérifiez qu'elle fonctionne.
+          </script>
+        </section>
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Hey !
+
+Quand on se retrouve à écrire bcp de code dans la fonction `link` d'une directive...
+
+...Surtout du code qui watche des valeurs de modèle, ou réagit à des événements qui existe déjà sous forme de directive AngularJS (e.g. `ngClick`)...
+
+Il faut se demander s'il n'y aurait pas une **façon plus déclarative de ré-écrire ce code**, plus AngularJS.
+
+Finalement, ce qu'on a fait était assez "jQuery-style".
+
+Le code déclaratif (basé sur des templates) est mieux, car :
+
+- Plus facile à écrire.
+- Plus facile à lire.
+- Plus facile pour les designers (templates séparés du code).
+          </script>
+        </section>
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Créer `myRating` avec la syntaxe déclarative
+
+Objectifs :
+
+- `scope.$watch()` --> binding expression dans le template
+- `element.on('click')` --> `ngClick`
+
+Rôle du contrôleur d'une directive == UNIQUEMENT de :
+
+- Publier des propriétés pour la vue.
+- Exposer une API que les autres directives vont pouvoir utiliser.
+
+Remplacez le code de la fonction `link` par un template qui fait appel à des méthodes du contrôleur.
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Wrapper des plugins jQuery
+
+**Questions à se poser :**
+
+- Êtes-vous certain d'avoir besoin de jQuery ? (librairie supplémentaire, pas intégré à AngularJS...)
+- Est-il possible de reproduire le comportement d'un plugin jQuery avec qq lignes de code ?
+- Y a-t-il une librairie AngularJS existante qui reproduit le comportement du plugin ? (ex : UI Bootstrap).
+
+**Approche générale :**
+
+Écrire une directive custom qui wrappe le plugin.
+          </script>
+        </section>
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+## Vos impressions ?
+
+- Contenu de la formation ?
+- Rythme ?
+- Niveau ?
+- Conditions ?
+          </script>
+        </section>
+
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+# Merci !
+          </script>
+        </section>
+
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="formation.js"></script>
+
+  </body>
+</html>
