@@ -12,6 +12,12 @@ Installer Karma :
 npm install -g karma
 ```
 
+Installer karma-cli :
+
+```
+npm install -g karma-cli
+```
+
 Initialiser un fichier de configuration Karma :
 
 ```
