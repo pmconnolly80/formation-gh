@@ -67,3 +67,9 @@ La commande `bower install <package> --save-dev` va installer `<package>` à la 
 
     # Installe un package et ajoute-le aux devDependencies de bower.json
     $ bower install <package> --save-dev
+
+
+Trouver des packages
+--------------------
+
+http://bower.io/search/
