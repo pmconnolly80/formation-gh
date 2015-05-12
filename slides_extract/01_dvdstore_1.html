@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Formation AngularJS - DVD Store (1)</title>
+
+    <meta name="description" content="Formation AngularJS">
+    <meta name="author" content="Vincent Caillierez">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="formation.css">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-controller="appCtrl">
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section data-markdown>
+          <script type="text/template">
+# DVD Store
+## Une véritable application avec AngularJS
+          </script>
+        </section>
+
+
+
+        <section class="size-xs leftp" data-markdown>
+          <script type="text/template">
+## Présentation du DVD Store
+
+**Création d'une application AngularJS de type boutique en ligne avec les fonctionnalités suivantes :**
+
+- Catalogue de produits navigable par l'utilisateur.
+- Panier (avec ajout/suppression de produits dans le panier).
+- Checkout (saisie de l'adresse de livraison + soumission de la commande).
+- Interface d'admin avec opérations CRUD pour gérer les produits du catalogue, accessible uniquement aux administrateurs identifiés.
+
+**Objectifs :**
+
+- Montrer à quoi ressemble le développement d'une véritable application AngularJS avec un exemple réaliste.
+- Mais le but est de focaliser sur AngularJS et l'intégration avec certains systèmes externes a été simplifiée (ex : accès au data store) ou omise (ex : paiement en ligne).
+- Partir du besoin de l'utilisateur/client plutôt que des caractéristiques d'AngularJS.
+          </script>
+        </section>
+
+
+
+        <section class="leftp" data-markdown>
+          <script type="text/template">
+## Organisation
+
+Découpage du travail en 2 parties :
+
+1. **Catalogue** (filtrage des produits par catégorie et par page, récupération des données en Ajax).
+2. **Panier et checkout** (routage d'URL, formulaires, widgets custom).
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+# DVD Store
+## Catalogue (Partie 1 sur 2)
+
+- Mise en place de l'application (création des fichiers, chargement d'AngularJS, etc.)
+- Afficher les produits du catalogue en partant de données "en dur" dans le JS.
+- Filtrer les produits par catégorie.
+- Filtrer les produits par page ("pagination").
+- Charger les données depuis le serveur via Ajax.
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Mise en route
+
+**Préparez les données (sur Kinvey) :**
+
+- Rendez-vous sur le dashboard de l'application `ngworkshop` (créée en début de formation).
+- Sur l'onglet "Data", ajoutez une collection appelée `products`.
+- Une fois sur cette collection, cliquez "Settings" (en haut à droite) puis "Import", et importez le fichier <note path="dvdstore/data/products.json"></note>.
+- Vérifiez que les données ont bien été importées.
+
+**Préparez l'application :**
+
+- Copiez le fichier `exos_starters/api_keys.js` et le répertoire `exos_starters/dvdstore` à l'endroit où vous faites les exercices. Dans `api_keys.js`, renseignez vos clés d'API Kinvey.
+          </script>
+        </section>
+
+
+
+        <section class="leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Afficher la liste des produits
+
+- Créez un contrôleur appelé `dvdStoreCtrl` qui porte sur la balise `<body>`.
+- Faites en sorte que ce contrôleur expose des données (codées en dur dans le JS) à la vue.
+- Faites en sorte que la vue utilise les données reçues du contrôleurs grâce à des directives comme `ng-repeat` ou des bindings comme <span class="ng-non-bindable">{{product.title}}</span>.
+
+DÉTAILS : <note path="dvdstore/01_afficher_produits.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="" data-markdown>
+          <script type="text/template">
+## Contrôleurs - Remarques
+
+- **Données exposées via `$scope.data.products`** (vs. juste `$scope.products`) pour éviter d'écraser accidentellement les données lors de l'héritage. **Règle : Toujours avoir un `.` dans le nom des variables de scope.**
+- **Rôle du contrôleur (en général) :** exposer à la vue les données et les méthodes dont elle a besoin.
+- Ici, `dvdStoreCtrl` est un **"top-level contrôleur"** car il porte sur la balise `<body>`. Tous les autres contrôleurs de l'application (qui se trouvent sur des balises enfants de `<body>`) hériteront de lui. Cet héritage peut servir à mutualiser certaines fonctionnalités ou données à l'échelle de l'application.
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+### Contrôleurs - Bonnes pratiques
+
+- **Donner un nom à la fonction factory du contrôleur** plutôt que fonction anonyme, e.g. `function dvdStoreCtrl($scope) { ... }`. Utile pour le débuggage.
+- **Binder les méthodes et les propriétés directement sur le contrôleur** (via `this`) plutôt que sur `$scope`. Il faut ensuite référencer le contrôleur de cette manière dans le markup : `ng-controller="SettingsController1 as settings"`. Cette technique présente plusieurs avantages :
+  - Plus clair à quel contrôleur on accède dans le template, notamment quand plusieurs contrôleurs s'appliquent au même élément. Exemple : `settings.name` vient du contrôleur `settings`.
+  - Comme tous les bindings contiennent un `.`, il n'y a pas de risque de masquage des primitives lors de l'héritage prototypal.
+- **Le contrôleur sert avant tout à EXPOSER des fonctionnalités à la vue** (pas à contenir le code de ces fonctionnalités). Si ces fonctionnalités sont trop complexes, mieux vaut les sortir du contrôleur dans un service (nous le verrons plus tard).
+          </script>
+        </section>
+
+
+
+        <section class="size-xs leftp ng-non-bindable" data-markdown>
+          <script type="text/template">
+## Filtres
+
+Servent à formater une expression avant de l'afficher.
+
+```
+{{product.price | currency}}
+```
+
+**Utilisation :**
+
+- Basique : `{{ expression | filter }}`
+- Chaînage de filtres : `{{ expression | filter1 | filter2 | ... }}`
+- Filtre avec arguments : `{{ expression | filter:argument1:argument2:... }}`
+- Peuvent être utilisés dans les vues, les contrôleurs ou les services. En dehors des expressions `{{ ... }}`, les filtres peuvent être appliqués programmatiquement avec le service `$filter`.
+
+**Où trouver des filtres ?**
+
+- Filtres inclus avec AngularJS : `currency`, `date`, `orderBy`...
+- En créant ses propres filtres (qui peuvent réutiliser les filtres existants).
+
+          </script>
+        </section>
+
+
+
+        <section class="size-s2" data-markdown>
+          <script type="text/template">
+## Créer son propre filtre
+
+```
+angular.module('myApp', [])
+  .filter('reverse', function() {
+    return function(input) {
+      // Do some transformations
+      return output;
+    };
+  })
+```
+
+DOC: https://code.angularjs.org/1.3.15/docs/guide/filter#creating-custom-filters
+
+- Les fonctions de filtres doivent être de pures fonctions JavaScript, idempotentes et *stateless*.
+- Un filtre DOIT retourner les données intactes s'il n'a pas réussi à les filtrer.
+- Un filtre modifie les données affichées à l'utilisateur, mais pas les données originales (idéal pour la couche "View").
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Créer la liste des catégories (grâce à un filtre maison)
+
+**Objectif :** générer la liste des catégories dynamiquement, à partir de la liste des produits, afin que les catégories reflètent automatiquement les changements dans le catalogue → **Création d'un filtre maison.**
+
+**Remarque :** Dans un projet réel, la liste des catégories viendrait probablement du serveur.
+
+- Créez le filtre maison avec `angular.module().filter()`. L'essentiel du travail ici est de créer le code de filtrage.
+- Appliquez le filtre à la liste des produits pour générer une navigation par catégorie que vous afficherez dans la colonne de gauche.
+
+DÉTAILS : <note path="dvdstore/02_afficher_categories.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="" data-markdown>
+          <script type="text/template">
+## Filtres - Bonnes pratiques
+
+- Penser à **blinder son code** en testant toujours que les valeurs venant de l'utilisateur ont le type attendu :
+  - `angular.isArray()`
+  - `angular.isString()`
+  - `angular.isObject()`
+  - `angular.isUndefined()`
+- Si les données reçues par le filtre n'ont pas le format attendu, renvoyez quand même les données non modifiées.
+- Remarque valable en général, pas que pour les filtres !
+          </script>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="formation.js"></script>
+
+  </body>
+</html>
