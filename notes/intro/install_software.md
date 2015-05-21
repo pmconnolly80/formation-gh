@@ -15,7 +15,7 @@ Avant tout, assurez-vous que les logiciels suivants ou équivalents sont install
 
 **Remarque importante.** Une application AngularJS peut tourner sur n'importe quel serveur web. Si vous avez déjà IIS, Apache, Nginx ou n'importe quel autre serveur sur votre machine de développement, vous pouvez l'utiliser pour héberger votre application AngularJS (il suffit de placer les fichiers de l'appli AngularJS quelque part sous le “web root” de votre serveur).
 
-Dans la suite de ces instructions, je vous montre comment installer Node.js + ExpressJS comme solution serveur --- EST CE BIEN CES TECHNOS LA ?? ---. C'est un stack assez répandu pour faire tourner les SPA, mais il n'est pas obligatoire.
+Dans la suite de ces instructions, je vous montre comment installer Node.js + ExpressJS comme solution serveur. C'est un stack assez répandu pour faire tourner les SPA, même s'il y a d'autres technologies possibles.
 
 
 Installer Node.js
