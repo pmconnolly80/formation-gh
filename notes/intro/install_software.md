@@ -47,7 +47,7 @@ Installer un serveur web avec ExpressJS
 
 Installons le module ExpressJS pour Node.js.
 
-Commençons par installer le générateur d'application ExpressJS (http://expressjs.com/starter/generator.html) avec la commande suivante :
+Commençons par installer le **générateur d'application ExpressJS**s (http://expressjs.com/starter/generator.html) avec la commande suivante :
 
     npm install -g express-generator
     # Linux/Mac: sudo npm install –g express-generator
