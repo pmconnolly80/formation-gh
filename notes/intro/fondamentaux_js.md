@@ -198,8 +198,41 @@ function add(x, y) {
 
 - Prend un nombre variable de paramètres nommés.
 - Peut contenir autant de statements que souhaité.
-- Peut déclarer des **variables locales** avec `var`.
 - Peut retourner une valeur.
+
+Le plus important (lié au développement Angular) :
+
+Une fonction peut contenir des déclarations de variables (avec `var`) et même des déclarations de fonctions. Les variables et fonctions déclarées à l'intérieur de cette fonction ont un **scope local** :
+
+```js
+function maFonction() {
+  var toto = 10;
+  function autreFonction() {
+    // ...
+  }
+}
+```
+
+Il y a deux façons de déclarer une fonction : **Function declaration** et **Function expression**
+
+```js
+// Function declaration
+function foo() { return 5; }
+
+// Anonymous function expression
+var foo = function() { return 5; }
+
+// Named function expression
+var foo = function foo() { return 5; }
+```
+
+Quelle différence ? La façon dont le navigateur charge ces fonctions dans le contexte d'exécution:
+
+- Les *function declarations* sont chargées AVANT que le moindre code soit exécuté.
+- Les *function expressions* sont chargées au moment où l'interpréteur atteint la ligne de code correspondante.
+
+CONCLUSION: Si vous appelez une function expression avant qu'elle soit chargée, vous obtiendrez une erreur. Mais si vous appelez une function declaration, ça marchera toujours.
+
 
 Principe de callback
 --------------------
