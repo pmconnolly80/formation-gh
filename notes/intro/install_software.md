@@ -84,7 +84,7 @@ Récupérer les fichiers "starters"
 
 Pour éviter d'avoir à télécharger toutes les librairies JS/CSS ou à repartir de zéro pour chaque exercice, récupérez le fichier suivant :
 
-(../../exos_starters.zip)
+[dd](../../exos_starters.zip)
 
 Décompressez-le et placez **son contenu** dans le répertoire `my-server/public` (qui doit être vide initialement).
 
