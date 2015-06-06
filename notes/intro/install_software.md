@@ -47,12 +47,12 @@ Installer un serveur web avec ExpressJS
 
 Installons le module ExpressJS pour Node.js.
 
-Commençons par installer le **générateur d'application ExpressJS**s (http://expressjs.com/starter/generator.html) avec la commande suivante :
+Commençons par installer le **générateur d'application ExpressJS** (http://expressjs.com/starter/generator.html) avec la commande suivante :
 
     npm install -g express-generator
     # Linux/Mac: sudo npm install –g express-generator
 
-Le flag `-g` dénote une installation globale. Il faut faire une installation globale pour pouvoir accéder à l'exécutable `express` depuis la ligne de commande.
+NB. Le flag `-g` dénote une **installation globale**. Il faut faire une installation globale pour pouvoir accéder à l'exécutable `express` depuis la ligne de commande.
 
 
 ### Créer une application ExpressJS
@@ -76,7 +76,21 @@ Démarrer le serveur web, qui sert le contenu du répertoire `public` :
 Ouvrez votre navigateur et visitez l'adrresse [http://localhost:3000](http://localhost:3000).
 Vous devriez voir le message de bienvenue d'Express.
 
-**JE VOUS CONSEILLE DE PLACER TOUS LES EXERCICES RÉALISÉS PENDANT LA FORMATION À L'INTÉRIEUR DU RÉPERTOIRE `public`, À RAISON D'UN RÉPERTOIRE PAR EXERCICE.**
+**SUPPRIMEZ COMPLÉTEMENT** le contenu du répertoire `my-server/public`, c'est là que nous mettrons le code des exercices réalisés pendant la formation, à raison d'un répertoire par exercice.
+
+
+Récupérer les fichiers "starters"
+---------------------------------
+
+Pour éviter d'avoir à télécharger toutes les librairies JS/CSS ou à repartir de zéro pour chaque exercice, récupérez le fichier suivant :
+
+[../../exos_starters.zip]
+
+Décompressez-le et placez **son contenu** dans le répertoire `my-server/public` (qui doit être vide initialement).
+
+Votre arborescence doit ressembler à ça :
+
+(my-server-directory.png)
 
 
 Préparer la base de données
