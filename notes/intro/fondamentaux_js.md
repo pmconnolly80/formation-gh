@@ -174,9 +174,14 @@ for (var i = 0, len = a.length; i < len; i++) {
 }
 ```
 
-Ajouter un élément à la fin d'un tableau :
+**IMPORTANT -** Ajouter un élément à la fin d'un tableau :
 ```js
 a.push(item);
+```
+
+**IMPORTANT -** Retirer `deleteCount` élément(s) à partir de la position `start` d'un tableau :
+```js
+a.splice(start, deleteCount);
 ```
 
 Il est très utile de connaître les méthodes de tableau : https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array
