@@ -200,8 +200,8 @@ function add(x, y) {
 - Peut contenir autant de statements que souhaité.
 - Peut retourner une valeur.
 
-Le plus important (lié au développement Angular)
-================================================
+Points importants (liés au développement Angular)
++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Une fonction peut contenir des déclarations de variables (avec `var`) et même des déclarations de fonctions. Les variables et fonctions déclarées à l'intérieur de cette fonction ont un **scope local** :
 
