@@ -230,11 +230,24 @@ var foo = function foo() { return 5; }
 
 Quelle différence ? La façon dont le navigateur charge ces fonctions dans le contexte d'exécution:
 
-- Les *function statements* sont chargées AVANT que le moindre code soit exécuté.
+- Les *function statements* sont tous chargés AVANT que le moindre code soit exécuté.
 - Les *function expressions* sont chargées au moment où l'interpréteur atteint la ligne de code correspondante.
 
-CONCLUSION: Si vous appelez une function expression avant qu'elle soit chargée, vous obtiendrez une erreur. Mais si vous appelez une function statement, ça marchera toujours.
+CONCLUSION: Si vous appelez une function expression avant qu'elle soit chargée, vous obtiendrez une erreur. Mais si vous appelez un function statement, ça marchera toujours.
 
+Exemple - Function Expression
+
+```js
+alert(foo()); // ERREUR: foo n'est pas encore chargé
+var foo = function() { return 5; }
+```
+
+Exemple - Function Statement
+
+```js
+alert(foo()); // Affiche 5. Les statements sont chargés avant que le moindre code soit exécuté.
+function foo() { return 5; }
+```
 
 Principe de callback
 --------------------
