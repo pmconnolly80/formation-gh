@@ -215,10 +215,10 @@ function maFonction() {
 
 `toto` et `autreFonction` sont accessibles localement, à l'intérieur de `maFonction`.
 
-2) Il y a deux façons de déclarer une fonction : **Function declaration** et **Function expression**
+2) Il y a deux façons de déclarer une fonction : **Function Statement** et **Function Expression**
 
 ```js
-// Function declaration
+// Function statement
 function foo() { return 5; }
 
 // Anonymous function expression
@@ -230,10 +230,10 @@ var foo = function foo() { return 5; }
 
 Quelle différence ? La façon dont le navigateur charge ces fonctions dans le contexte d'exécution:
 
-- Les *function declarations* sont chargées AVANT que le moindre code soit exécuté.
+- Les *function statements* sont chargées AVANT que le moindre code soit exécuté.
 - Les *function expressions* sont chargées au moment où l'interpréteur atteint la ligne de code correspondante.
 
-CONCLUSION: Si vous appelez une function expression avant qu'elle soit chargée, vous obtiendrez une erreur. Mais si vous appelez une function declaration, ça marchera toujours.
+CONCLUSION: Si vous appelez une function expression avant qu'elle soit chargée, vous obtiendrez une erreur. Mais si vous appelez une function statement, ça marchera toujours.
 
 
 Principe de callback
