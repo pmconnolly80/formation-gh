@@ -213,6 +213,8 @@ function maFonction() {
 }
 ```
 
+`toto` et `autreFonction` sont accessibles localement, à l'intérieur de `maFonction`.
+
 2) Il y a deux façons de déclarer une fonction : **Function declaration** et **Function expression**
 
 ```js
