@@ -82,9 +82,7 @@ Vous devriez voir le message de bienvenue d'Express.
 Récupérer les fichiers "starters"
 ---------------------------------
 
-Pour éviter d'avoir à télécharger toutes les librairies JS/CSS ou à repartir de zéro pour chaque exercice, récupérez le fichier suivant :
-
-[dd](../../exos_starters.zip)
+Pour éviter d'avoir à télécharger toutes les librairies JS/CSS ou à repartir de zéro pour chaque exercice, récupérez le fichier [exos_starters.zip](../../exos_starters.zip).
 
 Décompressez-le et placez **son contenu** dans le répertoire `my-server/public` (qui doit être vide initialement).
 
