@@ -202,7 +202,7 @@ function add(x, y) {
 
 **Points importants (liés au développement Angular)**
 
-1) Une fonction peut contenir des déclarations de variables (avec `var`) et même des déclarations de fonctions. Les variables et fonctions déclarées à l'intérieur de cette fonction ont un **scope local** :
+1) Une fonction peut contenir des déclarations de variables (avec `var`) et même **d'autres déclarations de fonction**. Les variables et fonctions déclarées à l'intérieur d'une fonction ont un **scope local** (c. à d. ne sont visibles qu'à l'intérieur de cette fonction) :
 
 ```js
 function maFonction() {
