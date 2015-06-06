@@ -76,7 +76,7 @@ Démarrer le serveur web, qui sert le contenu du répertoire `public` :
 Ouvrez votre navigateur et visitez l'adrresse [http://localhost:3000](http://localhost:3000).
 Vous devriez voir le message de bienvenue d'Express.
 
-**SUPPRIMEZ COMPLÉTEMENT** le contenu du répertoire `my-server/public`, c'est là que nous mettrons le code des exercices réalisés pendant la formation, à raison d'un répertoire par exercice.
+**SUPPRIMEZ COMPLÉTEMENT** le contenu du répertoire `my-server/public`. C'est là que nous mettrons le code des exercices réalisés pendant la formation, à raison d'un répertoire par exercice.
 
 
 Récupérer les fichiers "starters"
@@ -90,7 +90,7 @@ Décompressez-le et placez **son contenu** dans le répertoire `my-server/public
 
 Votre arborescence doit ressembler à ça :
 
-(my-server-directory.png)
+![Répertoire my-server](my-server-directory.png)
 
 
 Préparer la base de données
