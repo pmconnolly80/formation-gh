@@ -4,7 +4,7 @@ DVD Store - Afficher les produits
 **Dans le contrôleur :**
 
 - Créez un contrôleur appelé `dvdStoreCtrl` dans son propre fichier `controllers/dvdStoreCtrl.js`. Ce contrôleur doit appartenir au module `dvdStore` créé précédemment.
-- Utilisez le service `$http` pour récupérer les données depuis l'URL https://api.mongolab.com/api/1/databases/formation/collections/products?apiKey=ISXsR31X7VQjheVFt3rAMLTMrr0EXu89<br>Pour info, Mongolab est un service permettant d'exposer une base de données MongoDB derrière une API REST. En faisant un GET sur l'URL ci-dessus, on requête le contenu de la collection `products` dans la base de données `formation`.)
+- Utilisez le service `$http` pour récupérer les données depuis l'URL https://api.mongolab.com/api/1/databases/formation/collections/products?apiKey=ISXsR31X7VQjheVFt3rAMLTMrr0EXu89<br>Pour info, Mongolab est un service permettant d'exposer une base de données MongoDB derrière une API REST. En faisant un GET sur l'URL ci-dessus, on requête le contenu de la collection `products` se trouvant dans la base de données `formation`.
 - Exposez les données à la vue :<br/>`$scope.data = { products: LES_DONNEES_ICI };`
 
 **Dans la vue (page HTML) :**
