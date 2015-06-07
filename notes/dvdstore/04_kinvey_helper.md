@@ -12,7 +12,7 @@ Installer le Kinvey Helper
 2) Charger les scripts adéquats **après AngularJS** (attention aux chemins !) :
 
 ```html
-<script src="//da189i1jfloii.cloudfront.net/js/kinvey-angular-1.2.0.min.js"></script>
+<script src="//da189i1jfloii.cloudfront.net/js/kinvey-angular-1.3.5.min.js"></script>
 <script src="kinvey-helper.js"></script>
 <script src="../api_keys.js"></script>
 ```
