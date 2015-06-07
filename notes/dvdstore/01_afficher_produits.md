@@ -4,9 +4,8 @@ DVD Store - Afficher les produits
 **Dans le contrôleur :**
 
 - Créez un contrôleur appelé `dvdStoreCtrl` dans son propre fichier `controllers/dvdStoreCtrl.js`. Ce contrôleur doit appartenir au module `dvdStore` créé précédemment.
-- Exposez les données à la vue depuis le contrôleur :<br/>
-  `$scope.data = { products: COPIER_COLLER_LES_DONNEES_ICI };`<br/>
-  Vous trouverez les données à copier/coller dans le fichier [products.json](data/products.json).
+- Utilisez le service `$http` pour récupérer les données depuis l'URL https://api.mongolab.com/api/1/databases/formation/collections/products?apiKey=ISXsR31X7VQjheVFt3rAMLTMrr0EXu89
+- Exposez les données à la vue :<br/>`$scope.data = { products: LES_DONNEES_ICI };`
 
 **Dans la vue (page HTML) :**
 

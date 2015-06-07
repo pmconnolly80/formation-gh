@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>MVC</title>
+  <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+  <link href="../assets/css/bootstrap-theme.css" rel="stylesheet" />
+  <script src="../assets/js/angular.js"></script>
+  <script>
+
+  angular.module('myApp', [])
+
+    .controller('myController', function($scope) {
+
+      $scope.total = 99;
+
+      $scope.calculeTVA = function() {
+        $scope.tva = $scope.total * 0.2;
+        $scope.total_ttc = $scope.total + $scope.tva;
+      };
+
+    });
+
+  </script>
+</head>
+
+<body ng-controller="myController">
+
+  <p>
+   Total HT : {{ total }}<br>
+   Total HT : {{ tva }}<br>
+   Total HT : {{ total_ttc }}<br>
+  </p>
+
+  <p><button class="btn btn-default"
+             ng-click="calculeTVA()">
+      Calculer la TVA
+  </button></p>
+
+</body>
+
+</html>

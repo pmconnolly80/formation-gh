@@ -1,0 +1,31 @@
+<!-- Montrer la différence entre le source du HTML et la version compilée visible dans la console développeur -->
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Compilation</title>
+  <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+  <link href="../assets/css/bootstrap-theme.css" rel="stylesheet" />
+  <script src="../assets/js/angular.js"></script>
+  <script>
+  angular.module('myApp', [])
+    .controller('myController', function($scope) {
+      $scope.doSomething = function() {
+        alert('hello');
+      }
+    });
+  </script>
+</head>
+<body ng-init="msg='Comment ça va ?'" ng-controller="myController">
+
+  <p>Je peux faire des additions : {{ 1 + 2 }}</p>
+
+  <p>Je peux afficher des additions : {{ msg }}</p>
+
+  <p><button class="btn btn-default"
+             ng-click="doSomething()">
+      Dis bonjour
+  </button></p>
+
+</body>
+</html>
