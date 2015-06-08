@@ -13,7 +13,7 @@ Pour utiliser Kinvey dans un projet AngularJS :
 1) Charger la librairie Kinvey (depuis un CDN) *après* avoir chargé AngularJS :
 
 ```html
-<script src="//da189i1jfloii.cloudfront.net/js/kinvey-angular-1.1.14.min.js"></script>
+<script src="//da189i1jfloii.cloudfront.net/js/kinvey-angular-1.3.5.min.js"></script>
 ```
 
 2) Ajouter `kinvey` en dépendance de votre app AngularJS :
