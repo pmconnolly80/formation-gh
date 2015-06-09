@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="fr">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Formation AngularJS - Introduction</title>
+
+    <meta name="description" content="Formation AngularJS">
+    <meta name="author" content="Vincent Caillierez">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="formation.css">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-controller="appCtrl">
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section class="size-m" data-markdown>
+          <script type="text/template">
+# Formation AngularJS
+
+### Créer des applications web avec AngularJS
+
+Présenté par Vincent Caillierez
+
+<p><small><a href="http://ng-workshop.com/">NG-Workshop</a> / <a href="http://twitter.com/ng_workshop">@ng_workshop</a></small></p>
+          </script>
+        </section>
+
+
+
+        <section class="size-m" data-markdown>
+          <script type="text/template">
+## Bienvenue !
+
+#### Merci d'avoir choisi NG-Workshop.
+
+- **Formateur :** Vincent Caillierez. Développeur web et formateur depuis longtemps.
+- **Formation :** Pourquoi AngularJS ? Parce que JavaScript est in et AngularJS est in.
+- **Participants :** Profil ? Attentes ? Projet AngularJS ?
+          </script>
+        </section>
+
+
+
+        <section class="size-" data-markdown>
+          <script type="text/template">
+## Programme<br/>Vue d'ensemble
+
+- Jour 1 : Intro + Tuto guidé "Séries TV préférées"
+- Jour 2 : DVD Store
+- Jour 3 : Backoffice (auth)
+- Jour 4 : Bonuses
+          </script>
+        </section>
+
+
+
+        <section class="size-m" data-markdown>
+          <script type="text/template">
+## Remarque sur le programme
+
+- **Programme parfois organisé différemment** que sur le site, mais contenu similaire. Pourquoi ? Pour rendre la formation le plus "mettre les mains dans le code" possible.
+- **VOTRE retour est important.** Objectif : créer la meilleure formation AngularJS possible.
+          </script>
+        </section>
+
+
+
+        <section class="size-s ng-non-bindable" data-markdown>
+          <script type="text/template">
+## Ultra-brève intro à AngularJS
+
+Site officiel : https://angularjs.org/
+
+- Framework JavaScript permettant de concevoir des **applications monopages**, ou *Single Page Applications* (SPA).
+- Créé en **2009** en interne, à Google. Open-source depuis **2010**. Adopté par la communauté depuis **2012**.
+- **Framework "tout-en-un" :** modèle MVC, routage d'URL, gestion des formulaires, liaison de données bi-directionnelle, internationalisation, testing, sécurité... Objectif : pouvoir créer une appli uniquement avec AngularJS.
+- AngularJS **étend le HTML** en y ajoutant ses propres balises et attributs :
+```
+<ul>
+  <li ng-repeat="episode in data.episodes">{{episode.name}}</li>
+</ul>
+```
+- **Liaison de données bi-directionnelle :** une valeur modifiée en JavaScript est automatiquement modifiée dans le HTML et vice-versa.
+
+Quoi de neuf dans AngularJS 1.3 ? Voir exos_material/notes/intro/whats_new_in_1.3.md
+          </script>
+        </section>
+
+
+
+        <section class="size-xs" data-markdown>
+          <script type="text/template">
+## Que peut-on faire avec AngularJS ?
+
+- **Exemples :**
+  - [Virgin America](https://www.virginamerica.com/) (réservation de billets)
+  - [MSNBC](http://www.msnbc.com/the-last-word) (chaîne de télévision)
+  - [YouTube sur PS3](https://builtwith.angularjs.org/project/YouTube-on-PS3) (application YouTube sur console PS3)
+  - [DoubleClick](http://www.google.fr/intl/fr/doubleclick/) par Google (régie publicitaire sur Internet)
+
+- **Types de sites / d'applications :**
+  - Widgets AngularJS inclus dans un site web "traditionnel" : Virgin America, MSNBC.
+  - Applications Web 100% AngularJS : DoubleClick, [Localytics](http://www.localytics.com/).
+  - Applications mobiles : [Mallzee](http://mallzee.com/) (shopping app), [Mealshaker](http://mealshaker.com/).
+  - Apps embarquées : YouTube sur PS3.
+
+Plus d'exemples : https://builtwith.angularjs.org/ et [Top 15 Sites Built with AngularJs](http://thecoderfactory.com/posts/top-sites-built-with-angularjs).
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+## Points forts de AngularJS
+
+- **Tout-en-un :** contient tous les composants nécessaires au développement d'une application web complète, sans aucune dépendance.
+- **Prise en main relativement facile :** pour des tâches simples, AngularJS est moins verbeux et plus intuitif que de nombreux frameworks JavaScript.
+- **Liaison de données bi-directionnelle (*two-way data binding*) :** quand une donnée change côté JavaScript, le changement est répercuté automatiquement dans le HTML, et vice versa. Il ne faut pas "écouter" manuellement les changements.
+- **S'appuie sur des concepts bien connus** (HTML et JavaScript) sans créer un nouveau "paradigme".
+- Bonne implémentation du **modèle MVC**.
+- Supporte les **tests** de manière assez complète.
+          </script>
+        </section>
+
+
+
+        <section data-markdown>
+          <script type="text/template">
+## Points faibles de AngularJS
+
+- **Philosophie très différente de jQuery ou Backbone.js.** Les habitués de ces frameworks devront "désapprendre" pour se conformer au "AngularJS way".
+- Chaque brique du framework n'est **pas forcément la meilleure pour le job**. Exemples : [restangular](https://github.com/mgonto/restangular) remplace `ngResource`, [ui-router](https://github.com/angular-ui/ui-router) remplace `ngRoute`. NB. Résolu avec AngularJS 2.x.
+- L'utilisation avancée du framework nécessite de maîtriser des **concepts difficiles à comprendre** (digest, directives, compilation...).
+- **Pas de vraie couche "modèle de données"** (les modèles sont de simples objets JavaScript).
+- **Trop lourd** (39.5kb AngularJS vs. 6.5kb Backbone.js) mais tout est relatif (dépendances à inclure, "add-ons"...).
+          </script>
+        </section>
+
+
+
+        <section class="size-s2" data-markdown>
+          <script type="text/template">
+## AngularJS vs jQuery
+
+- jQuery est une **librairie** (appelée par VOTRE code), AnguarJS est un **framework** (C'EST LUI qui appelle votre code).
+- AngularJS est **plus complet** : modèle MVC, templates, validation de formulaires... jQuery n'a pas tout ça.
+- AngularJS implémente la **liaison de données bi-directionnelle** (*two-way data binding*), alors que jQuery doit écouter les événements et manipuler le DOM explicitement.
+- jQuery est très orienté "manipulation DOM" (bas niveau). AngularJS est **plus haut niveau**.
+
+**EN RÉSUMÉ :**
+
+- jQuery : Bien pour apporter rapidement quelques améliorations à des **pages web** existantes.
+- AngularJS : Bien pour créer une **application web** avec une architecture plus professionnelle.
+          </script>
+        </section>
+
+
+
+        <section class="size-s2" data-markdown>
+          <script type="text/template">
+## AngularJS vs Backbone.js
+
+- Backbone.js est **beaucoup plus léger** et la courbe d'apprentissage est plus linéaire (il n'y a que quelques concepts simples à comprendre : Models/Collections, Views, Routes).
+- Backbone.js est **tellement petit** qu'on peut lire le code du framework (ou sa version annotée) pour vraiment comprendre son fonctionnement.
+- **Backbone.js n'est qu'un point de départ.** Pour créer une appli, il faut ajouter des extensions comme Aura, Backbone UI, Chaplin, Geppetto, Marionette... Bien pour la flexibilité, mais nombreux choix à faire, qualité inégale, volume du code final... Note : Angular 2.x devrait être plus modulaire.
+- **Pas de structure imposée.**
+- **Pas liaison de données bi-directionnelle** (*two-way data binding*), donc plus de "boilerplate" code.
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+## Se repérer dans l'univers AngularJS
+
+- **Documentation - <i class="highlight">DEMO</i> :**
+  - Site officiel : https://angularjs.org/ (téléchargement, blog...)
+  - Livres: livre libre Ninja Squad (FR) (https://books.ninja-squad.com/angularjs), "Pro AngularJS" (EN)
+  - Cours en ligne (EN) : http://angular.codeschool.com/ (intro gratuite), https://egghead.io/ (€), [Pluralsight](http://www.pluralsight.com/tag/angular-js) (€)
+
+- **Communauté :**
+  - Modules contrib : http://ngmodules.org/
+  - Blogs : http://onehungrymind.com/, http://www.yearofmoo.com/
+  - News : http://www.ng-newsletter.com/
+  - Questions : http://stackoverflow.com/questions/tagged/angularjs
+          </script>
+        </section>
+
+
+        <section data-markdown>
+          <script type="text/template">
+## Outils de développement
+
+Le minimum nécessaire pour pouvoir coder avec AngularJS.
+
+- Un **navigateur web** moderne et récent ([Google Chrome](https://www.google.com/chrome/) recommandé).
+- Un **éditeur de texte** ([Sublime Text](http://www.sublimetext.com/), [WebStorm](https://www.jetbrains.com/webstorm/)).
+- Un **serveur web local*** (par exemple, `node.js` ou Apache).
+- [OPTIONNEL] [AngularJS Batarang](https://github.com/angular/angularjs-batarang) : extension Chrome pour faciliter le débuggage AngularJS.
+
+<p class="small">* On peut commencer à développer des applications AngularJS sans serveur local, mais certaines fonctionnalités risquent d'être perturbées (cookies, requête XHR...).</p>
+          </script>
+        </section>
+
+
+
+        <section class="size-m" data-markdown>
+          <script type="text/template">
+## Librairies JS et CSS
+
+- **AngularJS**, bien-sûr, à télécharger depuis le site officiel https://angularjs.org/. Version actuelle : `1.4.0` (mais nous utiliserons la `1.3.16` dans la formation). ATTENTION aux différences d'une version à l'autre.
+- **Bootstrap**, un framework CSS qui va nous servir pour la mise en forme des pages. À télécharger depuis http://getbootstrap.com/.
+- **Note :** Pour installer ces librairies, la bonne pratique est d'utiliser un *package manager* comme [Bower](http://bower.io/) :<br/>`bower install angular#1.3.2`
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Installer les outils + "Hello world"
+
+- Installez les logiciels décrits sur le slide précédent.
+- Vérifiez que node.js, ExpressJS et vos clés d'accès Kinvey sont en place. DÉTAILS : <note path="intro/install_software.md"></note> et <note path="intro/install_kinvey.md"></note>.
+- CONSEIL : mettez tous les exercices réalisés pendant la formation dans le répertoire `public` du serveur ExpressJS, à raison d'un répertoire par exercice.
+- Parvenez-vous à consulter la page `hello_world.html` dans votre navigateur **en passant par le serveur** ? (pas en l'ouvrant comme un fichier local).
+- Quelle est la différence entre consulter une page HTML servie par un serveur local VS ouverte directement dans le navigateur ?
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Fondamentaux HTML
+
+- Le DOCTYPE HTML5 : `<!DOCTYPE html>`
+- Syntaxe d'une balise HTML et attributs.
+- Différence entre les attributs `class` et `id` :
+  - **Classe :** répétable dans le doc et souvent plusieurs classes sur une même balise. En CSS : `.parag { ... }`
+  - **ID :** unique dans le doc et sur une même balise. En CSS : `#logo { ... }`
+- Charger des fichiers externes depuis un fichier HTML :
+  - **CSS :** `<link href="path/to/file.css" rel="stylesheet" />`
+  - **JavaScript :** <code>&lt;script src="path/to/script.js"&gt;...&lt;/script&gt;</code>
+
+DÉTAILS: <note path="intro/fondamentaux_html.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="size-xs leftp" data-markdown>
+          <script type="text/template">
+## Fondamentaux CSS (Twitter Bootstrap)
+
+Pourquoi [Twitter Bootstrap](http://getbootstrap.com/) ?
+
+- **Pour gagner du temps :** Contient toutes les fonctionnalités de base (grid, typo, forms...), responsive, plugins JavaScript (modal, dropdown).
+- **Bonne base de départ :** Customisable par vous OU thèmes basés sur Bootstrap (https://wrapbootstrap.com/).
+
+**À MAÎTRISER - <i class="highlight">DÉMO DE LA DOC</i> :**
+
+- Le système de grille (classes `row` et `col-XX-Y`).
+- Boutons et navigation.
+- Les classes utiles pour faire des alertes et des "boîtes" (`well` et `panel`).
+- Les autres composants fréquents (tableaux, formulaires...) utilisent le HTML standard avec quelques classes CSS à ajouter.
+
+DÉTAILS: <note path="intro/fondamentaux_css.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+## Fondamentaux JavaScript
+
+- Variables : `var name = "simon";`
+- Opérateurs : `+`, `-`, `*`, `/` et `%` (remainder)
+- Structures de contrôle : `if`, `else`, `for`
+- Objets : `{ name: 'Vince' }`
+- Tableaux : `['how', 'are', 'you']`
+- Fonctions et callbacks
+
+
+DÉTAILS: <note path="intro/fondamentaux_js.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="size-xs" data-markdown>
+          <script type="text/template">
+## Bootstraper une application AngularJS
+
+**EN HTML :**
+```html
+<html ng-app="exampleApp">
+  ...
+</html>
+```
+
+- Référencer la librairie `angular.js`.
+- La directive `ng-app` permet d'appliquer le module `exampleApp` à la balise `<html>` et ses enfants.
+
+**EN JAVASCRIPT :**
+```js
+var myApp = angular.module('exampleApp', []);
+```
+
+- Convention : suffixe `App` pour le module principal.
+- 2ème argument de `angular.module()` = array de modules dépendants. Laisser `[]` si pas de dépendances.
+- Si 2ème argument absent, on **récupère une référence à un module existant** : `angular.module('exampleApp');`
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp ng-non-bindable" data-markdown>
+          <script type="text/template">
+## Compilation & Directives
+
+Une fois que l'application AngularJS a été initialisée (ou **"bootstrappée"**), AngularJS parcourt le HTML à la recherche des 2 types d'éléments à compiler : **Bindings** `{{...}}` et **Directives** — C'est la **COMPILATION**.
+
+<img src="images/html-source-pre-compilation.png" width="45%"> →
+<img src="images/html-source-post-compilation.png" width="45%">
+
+NB. Certaines directives peuvent être utilisées avec **plusieurs syntaxes équivalentes** :
+
+* Syntaxe **élément** : `<ng-bind></ng-bind>`
+* Syntaxe **attribut** : `<span ng-bind="exp"></span>`
+* Il y aussi les syntaxes "classe" et "commentaire".
+          </script>
+        </section>
+
+
+
+        <section class="size-xs leftp ng-non-bindable exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Votre première application AngularJS
+
+**IMPORTANT.** Dans tous les exercices que nous ferons, vous référencerez les mêmes fichiers dans `assets`. Ce répertoire contient les fichiers AngularJS (dans `js`) et les fichiers de Bootstrap (dans `css`).
+
+Dans le répertoire `first_app` (EXISTE DÉJÀ), créez votre première application AngularJS :
+
+- Référencez les fichiers AngularJS et Bootstrap (plus `bootstrap-theme.css`) depuis `index.html`.
+- Créez un fichier `app.js` que vous chargerez depuis `index.html`.
+- Dans `app.js`, déclarez un module AngularJS `firstApp` que vous appliquerez à la balise `<html>`.
+- Vérifiez que si vous saisissez `{{2+2}}` dans la page HTML, c'est bien le chiffre 4 qui apparaît quand vous consultez la page depuis votre navigateur.
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Bonnes pratiques pour code JS :<br>iife + "use strict"
+
+**iife = Immediately-Invoked Function Expression***
+
+- AKA: *self-executing anonymous function*
+- JavaScript pattern pour empêcher les variables globales.
+- Explication : Les déclarations `var` en JavaScript ont un scope GLOBAL → Facile de redéfinir une variable par erreur. En revanche, les variables et fonctions déclarées dans une autre fonction ont un scope LOCAL.
+
+**"use strict";**
+
+En ajoutant `"use strict";` au début de la IIFE, on passe l'interpréteur JavaScript en mode strict pour tout le code de la fonction : permet de capter des erreurs courantes et de déclencher des exceptions (par ex l'utilisation d'une variable non déclarée).
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 leftp" data-markdown>
+          <script type="text/template">
+## Le pattern MVC<br/>dans AngularJS
+
+**Pattern MVC :** Séparation des responsabilités. Le modèle de données de l'application est découplé de la logique applicative et de la représentation des données.
+
+- **Modèle :** Données sur lesquelles les utilisateurs opèrent. Doit contenir les données et la logique qui opère sur les données (CRUD), mais pas les détails de stockage ni la logique d'affichage ou de transformation des données.
+- **Contrôleur :** Expose à la vue les données et les comportements permettant de déclencher des actions. C'est la "glue".
+- **Vues :** balises HTML classiques, enrichies par les directives et le data binding. Ne pas mettre de logique dans les vues !
+
+
+NB. Grâce à la **liaison de données bi-directionnelle**, vues et contrôleurs peuvent communiquer très facilement via le modèle.
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 leftp" data-markdown>
+          <script type="text/template">
+## MVC - Exemple
+
+<img src="images/mvc_vue_annot.png" width="40%">
+<img src="images/mvc_controlleur_modele_annot.png" width="55%">
+
+- Vue = HTML compilé
+- Contrôleur = `MODULE.controller()`
+- Modèle = tout ce qui est publié sur `$scope`
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+## L'injection de dépendances<br/>dans AngularJS
+
+```js
+myModule.controller('MyController', function($scope, weatherService) {
+  ...
+});
+```
+
+- **Principe inverse d'une fonction :** le composant demande ce dont il a besoin (vs. fonction qui dépend de l'appelant pour recevoir les bons paramètres). Central dans AngularJS.
+- **Davantage un feature d'organisation du code qu'un feature utilisateur.** Assez analogue aux imports de modules dans Python (`from my_module import my_fonction`).
+- **NB.** Ne pas confondre l'injection de dépendances avec un "module loader" comme [RequireJS](http://requirejs.org/). La DI AngularJS permet uniquement à un Module A de dire "j'ai besoin du Module B pour faire mon travail", mais il vous appartient de charger le fichier contenant le module B.
+          </script>
+        </section>
+
+
+
+        <section class="leftp size-xs exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## TUTO GUIDÉ :<br/>"Séries TV préférées"
+
+- Pourquoi directement du code ? On comprend mieux. Plus concret. Moins ennuyeux.
+- Démo de l'[application finale](http://ng-playground/formation/exos_etapes/series_tv/listing_12.html).
+- Tutoriel guidé : développons cette "mini-appli" ensemble et expliquons les concepts au fur et à mesure.
+
+DÉTAILS: <note path="series_tv/README.MD"></note>
+
+Une fois le tuto terminé, récapitulons les concepts fondamentaux :
+
+- Êtes-vous capable d'identifier modèle, vue et contrôleur (pattern MVC) dans l'exercice précédent ?
+- Syntaxe d'un contrôleur ?
+- Syntaxe d'un modèle ?
+- Syntaxe d'une vue ?
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Organiser les fichiers<br>de l'application
+
+Dans l'application précédente, on a mis **tout le code dans un seul fichier**. ALERTE MAUVAISE PRATIQUE !!
+
+Dans un projet réel, **deux types d'organisation possibles** :
+
+<table width="100%">
+  <tr>
+    <th>Par type</th>
+    <th>Par fonctionnalité</th>
+  </tr>
+  <tr>
+      <td style="vertical-align:top"><a href="images/fichiers_organisation-par-type.png"><img src="images/fichiers_organisation-par-type.png" width="55%"></a></td>
+    <td><a href="images/fichiers_organisation-par-fonctionnalite.png"><img src="images/fichiers_organisation-par-fonctionnalite.png" width="40%"></a></td>
+  </tr>
+<table>
+
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Injection de dépendances :<br>3 styles d'annotation
+
+Annoter une fonction = Dire à AngularJS ce qu'il doit injecter dedans.
+
+**1) Annotation implicite** (MAL mais facile - pas minification-safe) :
+
+```js
+myModule.controller('MyController', function($scope, weatherService) {
+  ...
+});
+```
+
+**2) Annotation "tableau inline"** (BIEN - résiste à la minification ; recommandé par la doc officielle) :
+
+```js
+myModule.controller('MyController', ['$scope', 'weatherService', function($scope, weatherService) {
+  ...
+}]);
+```
+
+**3) Annotation avec `$inject`** (résiste à la minification) :
+
+```js
+myModule.controller('MyController', MyController);
+
+MyController.$inject = ['$scope', 'weatherService'];
+function MyController($scope, weatherService) {
+  ...
+}
+```
+
+**Remarque :** des librairies contrib comme [ng-annotate](https://github.com/olov/ng-annotate) peuvent annoter votre code automatiquement.
+          </script>
+        </section>
+
+
+
+        <section data-markdown>
+          <script type="text/template">
+## Conclusion de l'intro
+
+- Principales caractéristiques du framework : étend la syntaxe HTML, liaison de données bi-directionnelle.
+- Bootstraper une application AngularJS / Compilation.
+- Modules.
+- Pattern MVC.
+- Injection de dépendances.
+          </script>
+        </section>
+
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="formation.js"></script>
+
+  </body>
+</html>
