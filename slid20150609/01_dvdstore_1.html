@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="fr">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Formation AngularJS - DVD Store (1)</title>
+
+    <meta name="description" content="Formation AngularJS">
+    <meta name="author" content="Vincent Caillierez">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="formation.css">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-controller="appCtrl">
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section data-markdown>
+          <script type="text/template">
+# DVD Store
+## Une véritable application avec AngularJS
+          </script>
+        </section>
+
+
+
+        <section class="size-xs leftp" data-markdown>
+          <script type="text/template">
+## Présentation du DVD Store
+
+**Création d'une application AngularJS de type boutique en ligne avec les fonctionnalités suivantes :**
+
+- Catalogue de produits navigable par l'utilisateur.
+- Panier (avec ajout/suppression de produits dans le panier).
+- Checkout (saisie de l'adresse de livraison + soumission de la commande).
+- Interface d'admin avec opérations CRUD pour gérer les produits du catalogue, accessible uniquement aux administrateurs identifiés.
+
+**Objectifs :**
+
+- Montrer à quoi ressemble le développement d'une **véritable application AngularJS** avec un exemple réaliste.
+- Mais le but est de focaliser sur AngularJS et l'intégration avec certains systèmes externes a été simplifiée (ex : accès au data store) ou omise (ex : paiement en ligne).
+- Partir du besoin de l'utilisateur/client plutôt que des caractéristiques d'AngularJS.
+          </script>
+        </section>
+
+
+
+        <section class="leftp" data-markdown>
+          <script type="text/template">
+## Organisation
+
+Découpage du travail en 2 parties :
+
+1. **Catalogue** (filtrage des produits par catégorie et par page, récupération des données en Ajax).
+2. **Panier et checkout** (routage d'URL, formulaires, widgets custom).
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+# DVD Store
+## Catalogue (Partie 1 sur 2)
+
+- **Mise en place** de l'application (création des fichiers, chargement d'AngularJS, etc.)
+- **Afficher** les produits du catalogue en partant de données "en dur" dans le JS.
+- Filtrer les produits par **catégorie**.
+- Filtrer les produits par **page** ("pagination").
+- **Charger les données** depuis le serveur via **Ajax**.
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Service `$http` : Fonctionnalités
+
+- Service natif d'AngularJS permettant de **communiquer avec un serveur distant** via des requêtes HTTP.
+- Basé sur `XMLHttpRequest` ou `JSONP`.
+- Supporte **toutes les méthodes HTTP** (GET, POST, PUT, DELETE...).
+- **Sérialise/Dé-sérialise automatiquement** les données JSON.
+- Fonctionne **de manière ASYNCHRONE** : `$http` renvoie une **promesse** à laquelle on passe des **callbacks** appelés au moment où la requête aboutit / échoue.
+- Injectable dans un contrôleur (comme tous les services) :
+
+```js
+myApp.controller("myController", function($http) {
+
+  $http.get('https://api.github.com/users/robconery').success(...).error(...);
+
+});
+```
+
+DOC: https://code.angularjs.org/1.3.16/docs/api/ng/service/$http
+          </script>
+        </section>
+
+
+
+        <section class="leftp" data-markdown>
+          <script type="text/template">
+## Service `$http` :<br/>Faire des requêtes HTTP
+
+**Syntaxe de base :**
+
+```js
+$http(config)
+  .success(function(data, status, headers, config) {
+    // Appelée de manière asynchrone quand la réponse est reçue (avec succès).
+  })
+  .error(function(data, status, headers, config) {
+    // Appelée de manière asynchrone si une erreur est reçue.
+  });
+```
+
+**Syntaxe raccourcie** (plus fréquente) :
+```js
+$http.get('/someUrl', [config]).success(...).error(...);
+$http.post('/someUrl', [config]).success(...).error(...);
+...
+```
+
+L'objet **`config`** passé en paramètre permet de modifier les headers, transformer les requêtes et les réponses...
+          </script>
+        </section>
+
+
+        <section class="leftp size-s2 exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Afficher la liste des produits
+
+- Vous ferez tout l'exercice dans le répertoire `dvdstore` EXISTANT.
+- Créez un contrôleur appelé `dvdStoreCtrl` qui porte sur la balise `<body>`.
+- Faites en sorte que ce contrôleur expose des données (codées en dur dans le JS) à la vue.
+- Faites en sorte que la vue utilise les données reçues du contrôleurs grâce à des directives comme `ng-repeat` ou des bindings comme <span class="ng-non-bindable">`{{product.title}}`</span>.
+
+DÉTAILS : <note path="dvdstore/01_afficher_produits.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="leftp size-s" data-markdown>
+          <script type="text/template">
+## Contrôleurs - Remarques
+
+- **Rôle du contrôleur (en général) :** Exposer à la vue les DONNÉES et MÉTHODES dont elle a besoin.
+- Données exposées via **`$scope.data.products`** (vs. juste `$scope.products`) pour éviter d'écraser accidentellement les données lors de l'héritage.<br/>**RÈGLE : Toujours avoir un `.` dans le nom des variables de scope.**
+
+**Hiérachie des contrôleurs :**
+
+- `dvdStoreCtrl` == **"top-level contrôleur"** car il porte sur la balise `<body>`.
+- Une application Angular contient souvent de **multiples contrôleurs** qui forment une **hiérarchie** (basée sur l'imbrication des balises HTML).
+- Les contrôleurs enfants **héritent des données et méthodes** exposées sur les contrôleurs parents. (Utile pour mutualiser certaines fonctionnalités ou données.)
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+### Contrôleurs - Bonnes pratiques
+
+- **Donner un nom à la fonction factory du contrôleur** plutôt que fonction anonyme, e.g. `function dvdStoreCtrl($scope) { ... }`. Utile pour le débuggage.
+- **Syntaxe "controller as" :** Publier les méthodes et les propriétés directement sur le contrôleur (via `this`) plutôt que sur `$scope`.<br>Il faut ensuite référencer le contrôleur de cette manière dans le markup :<br>`ng-controller="SettingsController1 as settings"`.<br>Cette technique présente plusieurs avantages :
+  - **Plus clair à quel contrôleur on accède** dans le template, notamment quand plusieurs contrôleurs s'appliquent au même élément. Exemple : `settings.name` vient du contrôleur `settings`.
+  - Comme tous les bindings contiennent un `.`, il n'y a **pas de risque de masquage des primitives** lors de l'héritage prototypal.
+- **Le contrôleur sert avant tout à EXPOSER des fonctionnalités à la vue** (pas à contenir le code de ces fonctionnalités). Si ces fonctionnalités sont trop complexes, mieux vaut **les sortir dans un service** (abordé + tard).
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Utiliser le service `$kinvey`
+
+Le service `$http` est plutôt **bas-niveau**.
+
+Il est fréquent de vouloir **plus d'abstraction** grâce à l'une des options suivantes :
+
+- [$resource](https://code.angularjs.org/1.3.16/docs/api/ngResource/service/$resource) (service inclus dans AngularJS)
+- [restangular](https://github.com/mgonto/restangular) (librairie tierce-partie)
+- [$kinvey](http://devcenter.kinvey.com/angular/guides/getting-started) (librairie tierce-partie "Kinvey SDK")
+
+Exemple d'utilisation de `$kinvey` :
+
+```js
+var promise = $kinvey.DataStore.find('collection-name');
+
+promise.then(function(models) {
+  ...
+}, function(err) {
+  ...
+});
+```
+
+**QUESTION :** Quelles remarques pouvez-vous faire sur le code ci-dessus ?
+
+DOC: http://devcenter.kinvey.com/angular/guides/datastore
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Tâches préparatoires
+
+**Préparez les données (sur KINVEY) :**
+
+- Rendez-vous sur le dashboard de l'application `ngworkshop` (créée en début de formation).
+- Sur l'onglet "Data", ajoutez une collection appelée `products`.
+- Une fois sur cette collection, cliquez "Settings" (en haut à droite) puis "Import", et importez le fichier <note path="dvdstore/data/products.json"></note>.
+- Vérifiez que les données ont bien été importées.
+
+**Préparez l'application (sur VOTRE MACHINE) :**
+
+- Éditez le fichier `public/api_keys.js` pour y mettre VOS clés d'API Kinvey.
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Charger les données depuis Kinvey
+
+Dans le contrôleur `dvdStoreCtrl` :
+
+- Remplacez l'utilisation de `$http` par l'utilisation de `$kinvey` pour requêter les données. DÉTAILS : <note path="dvdstore/04_kinvey_helper.md"></note>
+- Si la requête se déroule avec succès, exposez les données sur le scope.
+- Si la requête échoue, affichez un message d'erreur à l'utilisateur. Indice : la directive `ng-show` permet de montrer un élément HTML en fonction de la valeur d'une expression. (Vous pouvez simuler une erreur en introduisant une typo dans l'URL).
+          </script>
+        </section>
+
+
+
+        <section class="size-xs leftp ng-non-bindable" data-markdown>
+          <script type="text/template">
+## Filtres
+
+Servent à formater une expression avant de l'afficher.
+
+```
+{{product.price | currency}}
+```
+
+**Utilisation :**
+
+- **Basique** : `{{ expression | filter }}`
+- **Chaînage** de filtres : `{{ expression | filter1 | filter2 | ... }}`
+- Filtre avec **arguments** : `{{ expression | filter:argument1:argument2:... }}`
+- Peuvent être utilisés dans les vues, les contrôleurs ou les services. En dehors des expressions `{{ ... }}`, les filtres peuvent être appliqués programmatiquement avec le service `$filter`.
+
+**Où trouver des filtres ?**
+
+- Filtres **inclus avec AngularJS** : `currency`, `date`, `orderBy`...
+- En **créant ses propres filtres** (qui peuvent réutiliser les filtres existants).
+
+          </script>
+        </section>
+
+
+
+        <section class="size-s2" data-markdown>
+          <script type="text/template">
+## Créer son propre filtre
+
+```
+angular.module('myApp', [])
+  .filter('reverse', function() {
+    return function(input) {
+      // Do some transformations
+      return output;
+    };
+  })
+```
+
+DOC: https://code.angularjs.org/1.3.16/docs/guide/filter#creating-custom-filters
+
+- Les fonctions de filtres doivent être de pures fonctions JavaScript, idempotentes et *stateless*.
+- Un filtre DOIT retourner les données intactes s'il n'a pas réussi à les filtrer.
+- Un filtre modifie les données affichées à l'utilisateur, mais pas les données originales (idéal pour la couche "View").
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Créer la liste des catégories (grâce à un filtre maison)
+
+**Objectif :** générer la liste des catégories dynamiquement, à partir de la liste des produits, afin que les catégories reflètent automatiquement les changements dans le catalogue → **Création d'un filtre maison.**
+
+**Remarque :** Dans un projet réel, la liste des catégories viendrait probablement du serveur.
+
+- Créez le filtre maison avec `angular.module().filter()`. L'essentiel du travail ici est de créer le code de filtrage.
+- Appliquez le filtre à la liste des produits pour générer une navigation par catégorie que vous afficherez dans la colonne de gauche.
+
+DÉTAILS : <note path="dvdstore/02_afficher_categories.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="" data-markdown>
+          <script type="text/template">
+## Filtres - Bonnes pratiques
+
+- Penser à **blinder son code** en testant toujours que les valeurs venant de l'utilisateur ont le type attendu :
+  - `angular.isArray()`
+  - `angular.isString()`
+  - `angular.isObject()`
+  - `angular.isUndefined()`
+- Si les données reçues par le filtre n'ont pas le format attendu, **renvoyez quand même les données non modifiées**.
+- Remarque valable en général, pas que pour les filtres !
+          </script>
+        </section>
+
+
+
+        <section class="size-xs leftp ng-non-bindable" data-markdown>
+          <script type="text/template">
+## Ajouter des comportements<br>à une vue
+
+**Dans le CONTRÔLEUR :**
+
+- **Déclarer une fonction** qui implémente le comportement attendu :<br>`function doSomething() { ... }`
+- **Publier la fonction** sur le scope : `$scope.doSomething = doSomething;`
+- Ou sur le contrôleur lui-même : `this.doSomething = doSomething;`
+
+**Dans la VUE :**
+
+- S'assurer que le contrôleur est bien appliqué à la vue où le comportement sera utilisé.
+- Utiliser le comportement
+  - dans une directive : `<a ng-click="doSomething()">Action</a>`
+  - dans une expression : `<p>{{getValue()}}</p>`
+- La vue peut passer des valeurs du scope au comportement :<br>`<a ng-click="doSomething(param)">Action</a>`
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Afficher les produits de la cat. sélectionnée
+
+- Créez un nouveau contrôleur dédié à la liste des produits qui va mémoriser l'info "catégorie en cours" et exposera des fonctions pour changer de catégorie et filtrer les produits par catégorie.
+- Dans la vue, utilisez l'info "catégorie en cours" (fournie par le contrôleur) pour :
+  - Mettre en surbrillance la catégorie en cours.
+  - Filtrer la liste des produits pour la catégorie en cours.
+
+DÉTAILS : <note path="dvdstore/03_filtrer_produits.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+## Contrôleurs - Bonnes pratiques
+
+- On crée un **nouveau contrôleur** car les méthodes comme `selectCategory()` sont spécifiques à la liste des produits. On ne pollue pas le top-level contrôleur `dvdStoreCtrl` qui porte sur l'ensemble de l'application.
+- **Pattern très répandu :**
+  - Variable interne **non exposée sur le scope** (ici, `selectedCategory`).
+  - Combinée avec des méthodes qui exposent à la vue les fonctionnalités de notre choix (ici, `selectCategory()`).
+  - Déclinaison du même pattern : le contrôle injecte un service dont il expose uniquement quelques méthodes à la vue.
+  - **Conséquence bénéfique :** la vue a un pouvoir limité et ne peut accéder qu'aux données/méthodes explicitement exposées par le contrôleur.
+- Utilisation de la méthode `constant()` + DI pour éviter de mettre en dur une classe CSS dans le code du contrôleur.
+          </script>
+        </section>
+
+
+
+        <section class="size-xs leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Paginer la liste des produits
+
+**Même principe que le filtrage par catégorie :**
+
+- Le contrôleur gère une variable "numéro de page en cours" et expose à la vue des méthodes pour changer de page.
+- La liste des produits est filtrée par le numéro de page en cours grâce à un filtre maison `range`.
+- Astuce pour générer la liste des numéros de page avec un filtre maison `pageCount`.
+
+Remarque : Encore une fois, la pagination serait probablement faite côté serveur (vs. côté client) dans un vrai projet.
+
+Le code étant un peu compliqué, vous trouverez directement le code final ici : <note path="dvdstore/04_pagination.md"></note>
+
+- Intégrez ce code sur votre instance locale et vérifiez que la pagination fonctionne.
+          </script>
+        </section>
+
+
+
+        <section class="leftp" data-markdown>
+          <script type="text/template">
+## `ng-include` :<br/>Inclure des partiels HTML
+
+La directive `ng-include` permet de charger, de compiler et d'inclure dans une vue un fichier HTML externe, souvent appelé "partiel".
+
+Inclure un fichier au nom prédéfini -- ATTENTION aux quotes !! :
+
+```html
+<ng-include src="'partials/navigation.html'"></ng-include>
+```
+
+Inclure un fichier au nom variable (pas de quotes) :
+
+```html
+<ng-include src="ma_variable"></ng-include>
+```
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 leftp" data-markdown>
+          <script type="text/template">
+## `ng-include` : Bénéfices
+
+- **Meilleure organisation** des vues (un template par fonctionnalité).
+- **Réutilisation** du même partiel dans différentes vues.
+- **Performance(1)/flexibilité :** chargement à la demande de certains partiels (uniquement si besoin).
+- Principe d'inclusion réutilisé à plusieurs endroits dans AngularJS :
+  - **Routage d'URL :** visiter une URL précise charge un partiel précis.
+  - **Directives custom** ("widget") embarque un ou plusieurs partiel, e.g. `<meteo when="today" where="paris"></meteo>`.
+
+<p class="small">(1) Attention aux perfs : trop de requêtes HTTP peuvent nuire aux performances.</p>
+
+DOC: https://code.angularjs.org/1.3.16/docs/api/ng/directive/ngInclude
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Refactoriser notre appli pour utiliser `ng-include`
+
+- Créer deux partiels `views/error.html` et `views/productList.html` qui contiennent respectivement le HTML du message d'erreur et le HTML de la liste des produits (y compris la navigation par catégories et la pagination).
+- Inclure ces deux partiels dans la page principale grâce à `ng-include`.
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+## Conclusion de la partie 1
+
+Reprendre les concepts importants que nous avons vus.
+          </script>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="formation.js"></script>
+
+  </body>
+</html>
