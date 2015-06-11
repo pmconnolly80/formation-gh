@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="fr">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Formation AngularJS - Admin</title>
+
+    <meta name="description" content="Formation AngularJS">
+    <meta name="author" content="Vincent Caillierez">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="formation.css">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-controller="appCtrl">
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+
+
+        <section class="separator" data-background="images/angular-background.png" data-markdown>
+          <script type="text/template">
+# Backoffice 1
+## Créer une section d'administration
+          </script>
+        </section>
+
+
+
+        <section class="" data-markdown>
+          <script type="text/template">
+# Backoffice 1 - Introduction
+
+Poursuivons la création de notre application DVD Store en créant une **interface d'admin** avec ces fonctionnalités :
+
+- Utiliser `ui-router` à la place de `ngRoute`.
+- Protéger l'admin par une **authentification login/mdp**.
+          </script>
+        </section>
+
+
+
+        <section class="size- separator" data-background="images/angular-background.png" data-markdown>
+          <script type="text/template">
+# `ngRoute`<br/>vs<br/>`ui-router`
+          </script>
+        </section>
+
+
+
+        <section class="" data-markdown>
+          <script type="text/template">
+## Routage d'URL<br/>Limites de `ngRoute`
+
+- Une seule vue par page.
+- Pas de vues imbriquées.
+- Pas d'URLs imbriquées.
+
+**SOLUTION :**
+
+`ui-router` (https://github.com/angular-ui/ui-router) est un module AngularJS contrib qui résout tous ces problèmes.
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Routage d'URL avec `ui-router`
+
+Plus puissant que `ngRoute` : états vs URLs, héritage d'états, états abstraits...
+
+**Installer UI-Router :**
+
+- **Télécharger** la librairie `ui-router` depuis https://github.com/angular-ui/ui-router.
+- **Charger** la librairie `angular-ui-router.js` dans le fichier HTML principal APRÈS AngularJS lui-même.
+- Définir `ui.router` comme **dépendance** de l'application principale.
+
+**Dans la vue principale :**
+
+- Ajouter la directive `ui-view` à l'endroit où la "sous-vue" doit apparaître, e.g. `<div ui-view></div>`.
+
+**Dans `myApp.config()` :**
+
+- Définir les états (*states*) via `$stateProvider`.
+          </script>
+        </section>
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## `ui-router` - Fonctionnement
+
+- On ne parle pas d'URLs, mais d'**états**. Un état peut être associé à une URL ou non.
+- Quand un état est **activé**, la **vue** associée est affichée dans la balise portant la directive `ui-view`, et le **contrôleur** associé est exécuté.
+- Les états sont définis avec `$stateProvider` :
+
+```
+$stateProvider.state('productList', {
+  url: '/products',
+  templateUrl: 'partials/admin/products.html',
+  controller: 'ProductListCtrl as vm'
+});
+```
+
+NB. La syntaxe de `$stateProvider` est très similaire à celle de `$routeProvider` ; nombreuses propriétés communes (`template`, `templateUrl`, `controller`, `resolve`...).
+
+Définir un **état par défaut** (activé quand aucun autre état n'est activé) :
+
+```
+$urlRouterProvider.otherwise('/home');   // Attention : .otherwise(URL) -- Pas .otherwise(ETAT)
+```
+          </script>
+        </section>
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## `ui-router` - Activer un état
+
+**<span class="highlight">Activer un état == Naviguer dans l'application.</span>**
+
+**Trois techniques** pour activer un état :
+
+1. Changer manuellement l'URL :<br/>`admin.html#/products`
+2. Appeler `$state.go()` dans le code :<br/>`$state.go('productList')`
+3. Cliquer un lien contenant la directive `ui-sref` :<br/>`<a ui-sref="productList">Liste produits</a>`
+
+REMARQUE :
+
+- La technique 1 utilise le chemin (`#/products`).
+- Alors que les techniques 2 et 3 utilisent le nom de l'état (`productList`).
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## `ui-router` - Passer des paramètres via l'URL
+
+Exemple : https://mail.google.com/mail/u/0/#inbox/14c602c61bca6ecc
+
+**Pourquoi ?**
+
+- Pour adapter la vue aux paramètres passés dans l'URL.
+- Ultra-utilisé dans le modèle requête/réponse traditionnel.
+
+**Étape 1 -** Utiliser des paramètres `:myParam` à la déclaration des URLs :
+```js
+$stateProvider.state('contactDetail', {
+  url: '/contact/:contactId',
+  templateUrl: 'views/contactDetail.html',
+  controller: 'contactCtrl'
+});
+```
+
+**Étape 2 -** Récupérer ces paramètres via le service `$stateParams` :
+```js
+// Typiquement, on utilise $stateParams dans un contrôleur.
+myApp.controller('contactController', function($stateParams) {
+  var contactId = $stateParams.contactId;
+});
+```
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Routage d'URL - Attendre les données avant d'activer une route
+
+**PROBLÈME :** l'écran s'affiche initialement vide, puis se remplit à l'arrivée des données.
+
+**SOLUTION :** Grâce à la propriété `resolve` d'un état, on peut préciser des dépendances à injecter dans le contrôleur. Si une dépendance est une promesse, elle devra être résolue pour que le contrôleur soit instancié.
+
+`resolve` est un ensemble de paires clé/valeur, où **clé** = nom de la dépendance et **valeur** = nom d'un service (chaîne) ou fonction renvoyant une valeur.
+
+```js
+resolve: {
+  dep1: 'MyCustomService',
+  dep2: function MyCustomFunction() {
+    // Cette fonction est injectable. Avec des services par exemple.
+    // Cette fonction peut retourner une promesse.
+  }
+}
+```
+
+Très utile pour charger des données de manière asynchrone.
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## `resolve` - Exemple de code
+
+**Dans le bloc `myApp.config()` :**
+
+```js
+$stateProvider.state('contactList', {
+  url: '/contacts',
+  templateUrl: 'views/contactList.html',
+  controller: 'contactListController',
+  resolve: {
+    // On crée une dépendance `contacts`.
+    // La fonction associée peut elle-même être injectée, ici avec `DataService`.
+    contacts: ['DataService', function (DataService) {
+      // La fonction ci-dessous renvoie une promesse.
+      // Le contrôleur ne sera instancié qu'une fois cette promesse résolue.
+      return DataService.getContacts();
+    }]
+  }
+});
+```
+
+**Dans le contrôleur correspondant :**
+
+Le contrôleur peut être injecté avec `contacts`. Au moment où il est instancié, on a la garantie que `contacts` contient la valeur de la promesse résolue (i.e. les données ou une erreur) :
+
+```js
+myApp.controller('contactListController', ['$scope', 'contacts', function($scope, contacts) {
+  $scope.contacts = contacts;
+}]);
+```
+          </script>
+        </section>
+
+
+
+        <section class="size-s" data-markdown>
+          <script type="text/template">
+## Récap des points abordés
+
+- **Installer** la librairie `ui-router`.
+- **Déclarer** des états avec le service `$stateProvider`.
+- **Activer** un état précis pour naviguer dans l'application.
+- Passer des **paramètres** via l'URL et les récupérer (`:myParam` et `$stateParams.myParam`)
+- **Attendre** des données avant d'activer un état (propriété `resolve` dans la déclaration de l'état).
+
+**Remarque sur `ngRoute`**
+
+- **`resolve`** existe également pour `ngRoute` et fonctionne de manière identique.
+- Le **passage de paramètre** existe également pour `ngRoute` et fonctionne de manière quasi identique (mais `$routeParams` au lieu de `$stateParams`).
+          </script>
+        </section>
+
+
+
+        <section class="size-xs exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Créer les routes pour l'authentification
+
+NB. Utilisez l'appli située dans <note path="admin"></note> comme point de départ.
+
+- De quelles routes (états) avons-nous besoin pour permettre à l'utilisateur de :
+  - créer un compte,
+  - s'authentifier,
+  - et se déconnecter ?
+- Déclarez les routes listées ci-dessus grâce à `ui-router` :
+  - Respectez bien les étapes d'installation de `ui-router`.
+  - Pensez à utiliser les templates fournis pour chaque état (`auth/loginView.html`, `auth/registerView.html`...).
+- En plus des routes liées à l'authentification, créez une route `#/home` activée par défaut (template `common/homeView.html`).
+- Vérifiez que vous arrivez à activer les routes manuellement.
+- Implémenter un resolve qui retourne le statut de l'utilisateur ??
+          </script>
+        </section>
+
+
+
+        <section class="separator" data-background="images/angular-background.png" data-markdown>
+          <script type="text/template">
+## Authentification & Autorisation
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Auth & Autor. - Avertissement
+
+A ce stade, si notre appli était mise en ligne, **n'importe qui pourrait y accéder**.
+
+**LA SEULE "VRAIE" SÉCURITÉ EST CÔTÉ SERVEUR.**<br/>
+La sécurité côté client est un "bonus", mais il ne peut y avoir que ça.
+
+**Problématique COMPLEXE :**
+
+- Différences entre une application qui n'est utilisable QUE si on est authentifié (ex : Gmail) et une application dont les fonctionnalités changent une fois que l'utilisateur est authentifié (ex : je peux passer commande uniquement si je suis authentifié).
+- Comment gérer l'**expiration** de l'authentification sur le serveur et sur le client ? Comment le serveur prévient-il le client ? (par exemple, si un administrateur décide de bloquer le compte d'un utilisateur)
+- Comment gérer le même utilisateur authentifié **sur plusieurs terminaux** ?
+- Etc.
+          </script>
+        </section>
+
+
+
+        <section class="size-xs leftp" data-markdown>
+          <script type="text/template">
+## Auth & Autor. - Que sécuriser et comment dans une app AngularJS ?
+
+**Côté SERVEUR :**
+
+- **Ressources téléchargées par le navigateur :** le fichier `index.html`, les partiels HTML, images, pdf...Sécurisation au niveau du serveur (`.htaccess`, authentification classique via un framework, "signed URL" sur Amazon S3...), voire pas de sécurisation pour les fichiers non sensibles.
+- **URLs appelées par l'application :** API endpoints ou URLs d'une API REST. Sécurisation par clé d'API, OAuth, JSON Web Tokens... Clé d'API très sécure pour une appli JavaScript).
+
+**Côté CLIENT -- Pas vraiment sécurisé ! :**
+
+- **Routes de l'application.** Géré par AngularJS, sécurisation au niveau du routeur (`ngRoute` ou `ui-router`). ATTENTION : le contenu associé à la route pourrait être accessible en chargeant directement le template.
+- **Fragments de page** (afficher ou non un fragment de texte, un bouton...). Gérés par AngularJS en ajoutant des directives `ngIf`, `ngShow`, `ngHide`... ATTENTION: le fragment peut toujours apparaître si le JavaScript est modifié ou désactivé.
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 leftp" data-markdown>
+          <script type="text/template">
+## Auth & Autor.<br/>Workflow typique
+
+- L'**appli JavaScript** transmet le login/mdp de l'utilisateur à un serveur.
+- Le **serveur** réalise l'authentification et renvoie l'état de l'utilisateur (authentifié ou non) et son niveau d'autorisation (e.g. **rôles** "editor", "admin"... ou **permissions** "can administer content").
+- Le **tracking d'un client authentifié** par le serveur se fait grâce à des cookies ou des tokens ("JSON Web Tokens" populaire).
+- L'appli JavaScript est responsable d'utiliser les informations renvoyées par le serveur pour afficher/cacher certains fragments de page, bloquer l'accès à certaines URLs, etc.
+
+**CONCLUSION :** On a besoin d'un serveur !
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Auth & Autor.<br/>Backends custom
+
+- Côté serveur, **n'importe quelle techno** peut être utilisée (PHP, Python, Java), mais **Node.js** est populaire pour les applis JS.
+- Des **middlewares** comme http://passportjs.org/ (pour Node.js) facilitent la tâche.
+
+Vue d'ensemble d'une **solution MAISON** (<span class="highlight">côté SERVEUR</span>) :
+
+- Créer un **modèle de données** pour stocker les utilisateurs.
+- Créer les **routes serveur** permettant de créer un utilisateur, de le connecter, de le déconnecter.
+- Créer une méthode permettant de **vérifier le statut de l'utilisateur en cours** (authentifié ou pas ; niveau de permission).
+
+Tuto détaillé utilisant MongoDB, Mongoose, ExpressJS et Node.js : <note path="misc/custom_backend.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="leftp size-s2" data-markdown>
+          <script type="text/template">
+## Auth & Autor.<br/>Backends clé-en-main
+
+- Nombreux **BaaS/PaaS** ont une fonctionnalité identification : [Parse](https://parse.com/), [Kinvey](http://www.kinvey.com/), [Firebase](https://www.firebase.com/)...
+- Nombreux **SaaS** dédiés à l'authentification : [Auth0](https://auth0.com/), [UserApp](https://www.userapp.io/), [Userbin](https://userbin.com/).
+- Certains des services ci-dessus ont une excellente intégration avec AngularJS via des modules dédiés : Auth0 et Firebase.
+- **Réseaux sociaux :** [Google+ Sign-In](https://developers.google.com/+/web/signin/), [Facebook Login](https://developers.facebook.com/docs/facebook-login), [Twitter Sign-in](https://dev.twitter.com/web/sign-in)...
+
+REMARQUE : Avec les backends clé-en-main, le travail est **grandement simplifié**. Regardez la doc du SDK Kinvey à titre d'illustration : http://devcenter.kinvey.com/angular/guides/users
+          </script>
+        </section>
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Intégrer l'auth.
+
+EN BREF :
+
+- Créez un service `AuthService` qui implémente 3 méthodes `login()`, `logout()`, `signup()` et `getCurrentUser()` qui appellent les méthodes correspondantes de l'API Kinvey.
+- Créez le code des contrôleurs `LoginCtrl` et `RegisterCtrl` de sorte qu'ils utilisent `AuthService`.
+- Tester si l'utilisateur courant est loggé ou non.
+
+DÉTAIL EXERCICE : <note path="admin/00_integrer_auth.md"></note>
+          </script>
+        </section>
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Réfléchissons ensemble
+
+### N'y a-t-il pas un problème ?
+
+- Les contrôleurs utilisent `AuthService` plutôt que d'appeler directement des méthodes `$kinvey.doSomething()`, quel intérêt ?
+- Sans Kinvey, à quoi ressemblerait le code des méthodes de `AuthService` (`login`, `logout`, `signup`...) ?
+- Comment gérer les erreurs "propres" renvoyées par le SDK Kinvey ? (`UserAlreadyExists`, `AlreadyLoggedIn`...)
+- Comment gérer les erreurs bas niveau renvoyées par le SDK Kinvey ? (`Kinvey.getActiveUser can only be called after the promise returned by Kinvey.init fulfills or rejects.`)
+          </script>
+        </section>
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Attendre la fin d'une tâche asynchrone
+
+Ex précédent : récupérer user courant AVANT que Kinvey soit initialisé ==> ERREUR.
+
+Problème en fait **très répandu** :
+
+- Afficher une vue avant que les données aient été récupérées.
+- Afficher une page protégée avant d'avoir récupéré le statut de l'utilisateur.
+- EN BREF : tâches asynchrones == pas la main sur le flot d'exécution.
+
+**Comment le résoudre ?**
+
+A. Retarder de *n* secondes l'exécution du code pour laisser à Kinvey le temps de s'initialiser ?<br/>
+B. Conditionner le code dépendant de Kinvey à une promesse qui réussit une fois Kinvey initialisé ?<br/>
+C. Initialiser les routes après l'initialisation de Kinvey ?<br/>
+D. Utiliser la propriété `resolve` des routes ?
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Mettre `$kinvey.init()` dans un `resolve`
+
+- Déplacez le code `$kinvey.init()` dans un service `KinveyService.init()`.
+- Dans `$stateProvider`, créez un état abstrait :
+  - Nom : `admin`
+  - `resolve` : dépendance à `KinveyService.init()`
+  - `template: '<ui-view/>'` -- Pour laisser ses enfants "apparaître".
+- Faites en sorte que les états `home`, `login` et `logout` héritent de l'état `admin`. Grâce à cette technique, on a la garantie que Kinvey est initialisé avant l'activation des vues/contrôleurs.
+- Implémentez les redir. nécessaires. Voir <note path="admin/01_auth_liens_et_redir.md"></note>
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Auth & Autor. - Directive custom pour contrôler l'affichage
+
+**Objectif :** Appliquer aux éléments HTML qu'on veut protéger une directive custom qui n'affiche l'élément que si l'utilisateur est authentifié ou s'il possède un certain niveau de permission.
+
+Afficher un bloc de HTML uniquement aux utilisateurs identifiés :
+```html
+<div show-if="logged_in">
+  Utilisateur {{username}}
+  <button ng-click="logout()">Déconnexion</button>
+</div>
+```
+
+Afficher un bouton uniquement aux utilisateurs "admin" :
+```html
+<button ng-click="deleteUser()" show-if="admin">Supprimer l'utilisateur</button>
+```
+
+**Fonctionnement :** le contrôleur de la directive custom récupère l'utilisateur courant (et ses permissions éventuelles), et manipule ensuite le DOM pour cacher les éléments protégés.
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## Créer une directive `currentUser`
+
+Maintenant que la mécanique de login et les redirections sont en place, il nous reste à **afficher à l'écran** :
+
+- Le nom de l'utilisateur courant.
+- Un bouton pour se déconnecter.
+
+Pour cela, créez dans le module `auth` une directive custom `currentUser` avec ces caractéristiques :
+
+- Template : `common/currentUserView.html`
+- Contrôleur : récupère l'utilisateur courant et l'expose à la vue. Si loggé, la vue affiche le nom de l'utilisateur et un bouton Déconnexion. Si pas loggé, affiche "---".
+- Le bouton Déconnexion appellera une méthode `logout()` située dans un contrôleur parent (comme `AppCtrl` ou le contrôleur de l'état `admin`). Pourquoi ? Pour pouvoir se déconnecter depuis n'importe où.
+          </script>
+        </section>
+
+
+
+        <section class="size-s2 leftp" data-markdown>
+          <script type="text/template">
+## Notifications globales
+
+**AMÉLIORATIONS POSSIBLES :**
+
+- Informer l'utilisateur si le login a échoué. (console == BOF)
+- Informer l'utilisateur des succès/échecs des différentes opérations.
+
+**IDÉE :** Créer un module custom dédié aux notifications, utilisable partout dans l'application.
+
+**PRINCIPE :** un module de notification repose typiquement sur 2 composants :
+
+- Un **service** permettant de getter et setter un message. Quand un message est setté, un **événement** précis est émis à partir du `$rootScope`.
+- Une **directive** qui écoute l'**événement** en question sur le `$rootScope` et y répond en affichant le message à l'écran.
+          </script>
+        </section>
+
+
+        <section class="size- leftp" data-markdown>
+          <script type="text/template">
+## Un mot sur les événements
+
+AngularJS permet d'**émettre des événéments sur les scopes** :
+
+- `SCOPE.$broadcast(name, args)` envoie un événement "vers le bas", c. à d. sur le scope émetteur et **tous ses enfants**.
+- `SCOPE.$emit(name, args)` envoie un événement "vers le haut", c. à d. sur le scope émetteur et **tous ses parents**.
+
+Comme notre système de notification doit être global, on va partir du scope racine, le `$rootScope`, et utiliser `$broadcast()` pour propager l'événement **à tous les scopes de l'application**.
+
+Cela évite de se soucier de la hiérarchie des scopes de notre application.
+          </script>
+        </section>
+
+
+
+        <section class="size-s leftp exercise" data-background="images/slide3.jpg" data-markdown>
+          <script type="text/template">
+## EXERCICE: Intégrer les msg Flash
+
+Créez un module appelé `message.flash` dans le fichier `common/message-flash.js` avec :
+
+- Un service `flashMessageService` qui permet de getter et setter un message. Quand un message est setté, vous émettrez un événement appelé `NEW_MESSAGE` avec `$rootScope.$broadcast()`.
+- Une directive `messageFlash` qui écoute l'événement `NEW_MESSAGE` sur son propre scope et y réagit en affichant le message dans un alert box.
+
+Utilisez le module `message.flash` :
+
+- Intégrez le module dans l'application.
+- Affichez la directive `messageFlash` dans la vue principale.
+- Utilisez `flashMessageService` pour afficher des messages de confirmation suite aux opérations importantes (login, logout...).
+- Comment feriez-vous pour que le message disparaisse automatiquement au bout de quelques secondes ?
+          </script>
+        </section>
+
+
+        <section class="size-s leftp" data-markdown>
+          <script type="text/template">
+## Utiliser un Interceptor pour détecter les réponses
+
+DOC: https://code.angularjs.org/1.3.15/docs/api/ng/service/$http#interceptors
+
+**PRINCIPE :** gestion d'erreurs générales, authentification, ou tout pré-processing d'une requête ou post-processing d'une réponse (synchrone ou asynchrone) nécessitent l'interception des requêtes avant qu'elles soient transmises au serveur, ou des réponses avant qu'elles soient retournées à l'application.
+
+- Les interceptors utilisent les API promise et peuvent donc être utilisés en situation **synchrone ou asynchrone**.
+- Les interceptors sont des service factories enregistrés auprès du `$httpProvider` en les ajoutant à l'array `$httpProvider.interceptors`.
+- Il y a 4 sortes d'interceptors (permettant de cibler l'interception) : `request`, `requestError`, `response`, `responseError`
+
+**EXEMPLE :** dans les corrigés (`admin/auth/services.js`), vous trouverez un exemple d'interception des réponses `401 Unauthorized` pour rediriger l'utilisateur vers une page de login.
+          </script>
+        </section>
+
+        <section class="size-s separator" data-background="images/angular-background.png" data-markdown>
+          <script type="text/template">
+# Récap
+
+### `ui-router` et les *states*
+
+### `resolve`
+
+### Vue --> Contrôleur --> Service --> API (Kinvey)
+          </script>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="formation.js"></script>
+
+  </body>
+</html>
